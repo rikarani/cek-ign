@@ -7,7 +7,7 @@ export const mlbbModel = new Elysia().model({
   }),
   "mlbb.response": t.Object({
     ign: t.String(),
-    userId: t.String(),
-    zoneId: t.String(),
+    id: t.String(),
+    zone: t.String(),
   }),
 });
