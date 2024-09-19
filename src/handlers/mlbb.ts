@@ -1,15 +1,11 @@
-import { type Response } from "@/types/Response";
-
 import { NotFound } from "@/errors/NotFound";
+
+import { type Response } from "@/types/Response";
 
 type Query = {
   id: string;
   zone: string;
 };
-
-function formatResponse(text: string) {
-  return text.replace(/\+/g, " ");
-}
 
 export async function mlbb({ id, zone }: Query) {
   const hit = await fetch("https://order-sg.codashop.com/initPayment.action", {
@@ -37,8 +33,15 @@ export async function mlbb({ id, zone }: Query) {
   }
 
   return {
-    ign: formatResponse(response.confirmationFields.username),
-    id: response.user.userId,
-    zone: response.user.zoneId,
+    game: response.confirmationFields.productName,
+    account: {
+      ign: formatResponse(response.confirmationFields.username),
+      id: response.user.userId,
+      zone: response.user.zoneId,
+    },
   };
+}
+
+function formatResponse(text: string) {
+  return text.replace(/\+/g, " ");
 }
