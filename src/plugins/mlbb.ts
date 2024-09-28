@@ -24,14 +24,14 @@ export default new Elysia({ name: "mlbb" })
       if (code === "VALIDATION") {
         return {
           errors: error.all
-            .filter((x) => {
-              return "type" in x && x.type === 54;
+            .filter((err) => {
+              return "type" in err && err.type === 54;
             })
-            .map((x) => {
+            .map((err) => {
               return {
-                path: "path" in x && x.path,
-                message: "message" in x && x.message,
-                summary: x.summary,
+                path: "path" in err && err.path,
+                message: "message" in err && err.message,
+                summary: err.summary,
               };
             }),
         };
