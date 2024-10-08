@@ -23,14 +23,14 @@ export default new Elysia({ name: "genshin" })
       if (code === "VALIDATION") {
         return {
           errors: error.all
-            .filter((x) => {
-              return "type" in x && x.type === 54;
+            .filter((err) => {
+              return "type" in err && err.type === 54;
             })
-            .map((x) => {
+            .map((err) => {
               return {
-                path: "path" in x && x.path,
-                message: "message" in x && x.message,
-                summary: x.summary,
+                path: "path" in err && err.path,
+                message: "message" in err && err.message,
+                summary: err.summary,
               };
             }),
         };
@@ -38,7 +38,7 @@ export default new Elysia({ name: "genshin" })
 
       if (code === "UNKNOWN") {
         if (error.name === "Invalid UID") {
-          set.status = "Unprocessable Content";
+          set.status = "Bad Request";
         } else if (error.name === "Not Found") {
           set.status = "Not Found";
         }
