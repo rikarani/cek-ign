@@ -1,4 +1,4 @@
-import { Elysia, t } from "elysia";
+import { Elysia, t, StatusMap } from "elysia";
 
 import { mlbb } from "@/handlers/mlbb";
 
@@ -9,11 +9,15 @@ export default new Elysia({ name: "mlbb" })
       zone: t.String(),
     }),
     "mlbb.response": t.Object({
-      game: t.String(),
-      account: t.Object({
-        ign: t.String(),
-        id: t.String(),
-        zone: t.String(),
+      success: t.Boolean(),
+      code: t.Numeric(),
+      data: t.Object({
+        game: t.String(),
+        account: t.Object({
+          ign: t.String(),
+          id: t.String(),
+          zone: t.String(),
+        }),
       }),
     }),
   })
@@ -23,6 +27,8 @@ export default new Elysia({ name: "mlbb" })
     error({ code, error, set }) {
       if (code === "VALIDATION") {
         return {
+          success: false,
+          code: StatusMap["Unprocessable Content"],
           errors: error.all
             .filter((err) => {
               return "type" in err && err.type === 54;
@@ -30,8 +36,8 @@ export default new Elysia({ name: "mlbb" })
             .map((err) => {
               return {
                 path: "path" in err && err.path,
-                message: "message" in err && err.message,
-                summary: err.summary,
+                name: "message" in err && err.message,
+                message: err.summary,
               };
             }),
         };
@@ -41,6 +47,8 @@ export default new Elysia({ name: "mlbb" })
         set.status = "Not Found";
 
         return {
+          success: false,
+          code: StatusMap["Not Found"],
           error: {
             name: error.name,
             message: error.message,
