@@ -1,8 +1,16 @@
 import { Elysia } from "elysia";
+import { cors } from "@elysiajs/cors";
+import { swagger } from "@elysiajs/swagger";
 
-import { mlbb, genshin } from "./plugins";
+import { port, swaggerConfig, corsConfig } from "@/utils/config";
+import { mlbb, genshin } from "@/plugins";
 
-const port = process.env.PORT || 6969;
-const app = new Elysia().use(mlbb).use(genshin).listen(port);
+const app = new Elysia()
+  .use(swagger(swaggerConfig))
+  .use(cors(corsConfig))
+  .use(mlbb)
+  .use(genshin)
+  .get("/spec", () => Bun.file("./spec.yaml"))
+  .listen(port);
 
-console.log(`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`);
+console.log(`Elysia is running at ${app.server?.hostname}:${app.server?.port}`);
