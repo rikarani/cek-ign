@@ -2,10 +2,12 @@ openapi: 3.0.0
 info:
   title: Cek IGN API Documentation
   description: Dokumentasi + Playground
-  version: 1.0.0
+  version: 1.1.0
 paths:
   /mlbb:
     get:
+      summary: "Mobile Legends: Bang-Bang"
+      description: game kikir dari munton
       parameters:
         - in: query
           name: id
@@ -31,30 +33,22 @@ paths:
                 properties:
                   success:
                     type: boolean
-                    description: Status
                   code:
                     type: number
-                    description: Kode
                   data:
                     type: object
-                    description: Isi Response
                     properties:
                       game:
                         type: string
-                        description: Nama Game
                       account:
                         type: object
-                        description: Detail Akun
                         properties:
                           ign:
                             type: string
-                            description: In-Game Name
                           id:
                             type: string
-                            description: ID Akun
                           zone:
                             type: string
-                            description: Zone Akun
               example:
                 success: true
                 code: 200
@@ -73,25 +67,19 @@ paths:
                 properties:
                   success:
                     type: boolean
-                    description: Status
                   code:
                     type: number
-                    description: Kode
                   errors:
                     type: array
-                    description: Error
                     items:
                       type: object
                       properties:
                         path:
                           type: string
-                          description: Bagian Yang Error
                         name:
                           type: string
-                          description: Nama Error
                         message:
                           type: string
-                          description: Pesan Error
               examples:
                 Missing ID:
                   value:
@@ -143,23 +131,144 @@ paths:
                 properties:
                   success:
                     type: boolean
-                    description: Status
                   code:
                     type: number
-                    description: Kode
                   error:
                     type: object
-                    description: Error
                     properties:
                       name:
                         type: string
-                        description: Nama Error
                       message:
                         type: string
-                        description: Pesan Error
               example:
                 success: false
                 code: 404
                 error:
                   name: Not Found
                   message: IGN Tidak Ditemukan
+  /genshin:
+    get:
+      summary: Genshin Impact
+      description: game kikir dari hoyoverse
+      parameters:
+        - in: query
+          name: uid
+          description: UID Akun
+          required: true
+          schema:
+            type: string
+            example: "800081806"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  code:
+                    type: number
+                  data:
+                    type: object
+                    properties:
+                      game:
+                        type: string
+                      account:
+                        type: object
+                        properties:
+                          uid:
+                            type: string
+                          server:
+                            type: string
+              example:
+                success: true
+                code: 200
+                data:
+                  game: Genshin Impact
+                  account:
+                    ign: "M****a"
+                    uid: "800081806"
+                    server: Asia
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  code:
+                    type: number
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        path:
+                          type: string
+                        name:
+                          type: string
+                        message:
+                          type: string
+              example:
+                success: false
+                code: 400
+                errors:
+                  [
+                    {
+                      path: "/uid",
+                      name: "Expected string",
+                      message: "Expected  property 'uid' to be  string but found: undefined",
+                    },
+                  ]
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  code:
+                    type: number
+                  error:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      message:
+                        type: string
+              example:
+                success: false
+                code: 404
+                error:
+                  name: Not Found
+                  message: IGN Tidak Ditemukan
+        422:
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  code:
+                    type: number
+                  error:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      message:
+                        type: string
+              example:
+                success: false
+                code: 422
+                error:
+                  name: Invalid UID
+                  message: Masukkan UID yang valid
