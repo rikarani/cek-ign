@@ -1,5 +1,7 @@
-import { type Response } from "@/types/Response";
+import { StatusMap } from "elysia";
 import { NotFound } from "@/errors/NotFound";
+
+import { type Response } from "@/types/Response";
 
 type Query = {
   id: string;
@@ -32,8 +34,19 @@ export async function mlbb({ id, zone }: Query) {
   }
 
   return {
-    ign: response.confirmationFields.username,
-    userId: response.user.userId,
-    zoneId: response.user.zoneId,
+    success: true,
+    code: StatusMap.OK,
+    data: {
+      game: response.confirmationFields.productName,
+      account: {
+        ign: formatResponse(response.confirmationFields.username),
+        id: response.user.userId,
+        zone: response.user.zoneId,
+      },
+    },
   };
+}
+
+function formatResponse(text: string) {
+  return text.replace(/\+/g, " ");
 }
