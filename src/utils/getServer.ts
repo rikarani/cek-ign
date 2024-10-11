@@ -22,5 +22,5 @@ export function getServer({ uid }: Params): Server {
     return Server.TW_HK_MO;
   }
 
-  throw new InvalidUID("taroh UID yang bener anying");
+  throw new InvalidUID("Masukkan UID yang valid");
 }
