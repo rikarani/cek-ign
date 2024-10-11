@@ -1,4 +1,4 @@
-import { Elysia, t } from "elysia";
+import { Elysia, t, StatusMap } from "elysia";
 
 import { genshin } from "@/handlers/genshin";
 
@@ -8,11 +8,15 @@ export default new Elysia({ name: "genshin" })
       uid: t.String(),
     }),
     "genshin.response": t.Object({
-      game: t.String(),
-      account: t.Object({
-        ign: t.String(),
-        uid: t.String(),
-        server: t.String(),
+      success: t.Boolean(),
+      code: t.Numeric(),
+      data: t.Object({
+        game: t.String(),
+        account: t.Object({
+          ign: t.String(),
+          uid: t.String(),
+          server: t.String(),
+        }),
       }),
     }),
   })
@@ -21,7 +25,11 @@ export default new Elysia({ name: "genshin" })
     response: "genshin.response",
     error({ code, error, set }) {
       if (code === "VALIDATION") {
+        set.status = "Bad Request";
+
         return {
+          success: false,
+          code: StatusMap["Bad Request"],
           errors: error.all
             .filter((err) => {
               return "type" in err && err.type === 54;
@@ -29,8 +37,8 @@ export default new Elysia({ name: "genshin" })
             .map((err) => {
               return {
                 path: "path" in err && err.path,
-                message: "message" in err && err.message,
-                summary: err.summary,
+                name: "message" in err && err.message,
+                message: err.summary,
               };
             }),
         };
@@ -38,14 +46,18 @@ export default new Elysia({ name: "genshin" })
 
       if (code === "UNKNOWN") {
         if (error.name === "Invalid UID") {
-          set.status = "Bad Request";
+          set.status = "Unprocessable Content";
         } else if (error.name === "Not Found") {
           set.status = "Not Found";
         }
 
         return {
-          name: error.name,
-          message: error.message,
+          success: false,
+          code: StatusMap[set.status as keyof StatusMap],
+          error: {
+            name: error.name,
+            message: error.message,
+          },
         };
       }
     },

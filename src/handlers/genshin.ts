@@ -1,14 +1,15 @@
+import { StatusMap } from "elysia";
 import { NotFound } from "@/errors/NotFound";
 import { getServer } from "@/utils/getServer";
 
 import { Genshin } from "@/types/Server";
 import { type Response } from "@/types/Response";
 
-type Params = {
+type Query = {
   uid: string;
 };
 
-export async function genshin({ uid }: Params) {
+export async function genshin({ uid }: Query) {
   const server = getServer({ uid });
 
   const hit = await fetch("https://order-sg.codashop.com/initPayment.action", {
@@ -36,11 +37,15 @@ export async function genshin({ uid }: Params) {
   }
 
   return {
-    game: response.confirmationFields.productName,
-    account: {
-      ign: response.confirmationFields.username,
-      uid: response.user.userId,
-      server: render(response.user.zoneId),
+    success: true,
+    code: StatusMap.OK,
+    data: {
+      game: response.confirmationFields.productName,
+      account: {
+        ign: response.confirmationFields.username,
+        uid: response.user.userId,
+        server: render(response.user.zoneId),
+      },
     },
   };
 }
