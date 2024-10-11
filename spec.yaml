@@ -1,0 +1,165 @@
+openapi: 3.0.0
+info:
+  title: Cek IGN API Documentation
+  description: Dokumentasi + Playground
+  version: 1.0.0
+paths:
+  /mlbb:
+    get:
+      parameters:
+        - in: query
+          name: id
+          description: ID Akun
+          required: true
+          schema:
+            type: string
+            example: "469123581"
+        - in: query
+          name: zone
+          description: Zone Akun
+          required: true
+          schema:
+            type: string
+            example: "2418"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Status
+                  code:
+                    type: number
+                    description: Kode
+                  data:
+                    type: object
+                    description: Isi Response
+                    properties:
+                      game:
+                        type: string
+                        description: Nama Game
+                      account:
+                        type: object
+                        description: Detail Akun
+                        properties:
+                          ign:
+                            type: string
+                            description: In-Game Name
+                          id:
+                            type: string
+                            description: ID Akun
+                          zone:
+                            type: string
+                            description: Zone Akun
+              example:
+                success: true
+                code: 200
+                data:
+                  game: "Mobile Legends: Bang-Bang"
+                  account:
+                    ign: Erikaaaa
+                    id: "469123581"
+                    zone: "2418"
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Status
+                  code:
+                    type: number
+                    description: Kode
+                  errors:
+                    type: array
+                    description: Error
+                    items:
+                      type: object
+                      properties:
+                        path:
+                          type: string
+                          description: Bagian Yang Error
+                        name:
+                          type: string
+                          description: Nama Error
+                        message:
+                          type: string
+                          description: Pesan Error
+              examples:
+                Missing ID:
+                  value:
+                    success: false
+                    code: 400
+                    errors:
+                      [
+                        {
+                          path: "/id",
+                          name: "Expected string",
+                          message: "Expected  property 'id' to be  string but found: undefined",
+                        },
+                      ]
+                Missing Zone:
+                  value:
+                    success: false
+                    code: 400
+                    errors:
+                      [
+                        {
+                          path: "/zone",
+                          name: "Expected string",
+                          message: "Expected  property 'zone' to be  string but found: undefined",
+                        },
+                      ]
+                Missing Both:
+                  value:
+                    success: false
+                    code: 400
+                    errors:
+                      [
+                        {
+                          path: "/id",
+                          name: "Expected string",
+                          message: "Expected  property 'id' to be  string but found: undefined",
+                        },
+                        {
+                          path: "/zone",
+                          name: "Expected string",
+                          message: "Expected  property 'zone' to be  string but found: undefined",
+                        },
+                      ]
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Status
+                  code:
+                    type: number
+                    description: Kode
+                  error:
+                    type: object
+                    description: Error
+                    properties:
+                      name:
+                        type: string
+                        description: Nama Error
+                      message:
+                        type: string
+                        description: Pesan Error
+              example:
+                success: false
+                code: 404
+                error:
+                  name: Not Found
+                  message: IGN Tidak Ditemukan
