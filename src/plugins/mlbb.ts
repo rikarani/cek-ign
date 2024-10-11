@@ -26,9 +26,11 @@ export default new Elysia({ name: "mlbb" })
     response: "mlbb.response",
     error({ code, error, set }) {
       if (code === "VALIDATION") {
+        set.status = "Bad Request";
+
         return {
           success: false,
-          code: StatusMap["Unprocessable Content"],
+          code: StatusMap["Bad Request"],
           errors: error.all
             .filter((err) => {
               return "type" in err && err.type === 54;
