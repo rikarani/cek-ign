@@ -10,7 +10,7 @@ const app = new Elysia()
   .use(cors(corsConfig))
   .use(mlbb)
   .use(genshin)
-  .get("/spec", () => Bun.file("./spec.yaml"))
+  .get("/spec", () => Bun.file("./src/openapi.yaml"))
   .listen(port);
 
 console.log(`Elysia is running at ${app.server?.hostname}:${app.server?.port}`);
