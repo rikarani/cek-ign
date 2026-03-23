@@ -1,16 +1,20 @@
 import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
-import { swagger } from "@elysiajs/swagger";
+import { openapi } from "@elysiajs/openapi";
 
-import { port, swaggerConfig, corsConfig } from "@/utils/config";
-import { mlbb, genshin } from "@/plugins";
+import { config } from "@/utils/config";
+
+import mlbb from "@/mlbb";
 
 const app = new Elysia()
-  .use(swagger(swaggerConfig))
-  .use(cors(corsConfig))
-  .use(mlbb)
-  .use(genshin)
-  .get("/spec", () => Bun.file("./spec.yaml"))
-  .listen(port);
+  .use(cors(config.cors))
+  .use(openapi(config.openapi))
+  .group("/api", (app) => app.use(mlbb))
+  .get("/", ({ redirect }) => redirect("/openapi"));
 
-console.log(`Elysia is running at ${app.server?.hostname}:${app.server?.port}`);
+if (process.env.NODE_ENV !== "production") {
+  app.listen(config.port);
+  console.log(`Server running at ${app.server?.hostname}:${app.server?.port}`);
+}
+
+export default app;
