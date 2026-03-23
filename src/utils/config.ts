@@ -1,39 +1,35 @@
-import { type CORSConfig } from "@elysiajs/cors";
-import { type ElysiaSwaggerConfig } from "@elysiajs/swagger";
+import type { CORSConfig } from "@elysiajs/cors";
+import type { ElysiaOpenAPIConfig } from "@elysiajs/openapi";
 
-export const port = process.env.PORT || 6969;
-export const corsConfig: CORSConfig = {
-  credentials: false,
-  origin: "*",
-  methods: "GET",
+type Config = {
+  port: number | string;
+  cors: CORSConfig;
+  openapi: ElysiaOpenAPIConfig<true>;
 };
-export const swaggerConfig: ElysiaSwaggerConfig<"/playground"> = {
-  path: "/playground",
-  scalarConfig: {
-    spec: {
-      url: "/spec",
-    },
-    hideModels: true,
-    darkMode: true,
-    forceDarkModeState: "dark",
-    hideDarkModeToggle: true,
-    theme: "purple",
-    defaultHttpClient: {
-      targetKey: "javascript",
-      clientKey: "fetch",
-    },
+
+export const config = {
+  port: process.env.PORT || 6969,
+  cors: {
+    origin: "*",
+    methods: ["GET"],
+    credentials: false,
   },
-  documentation: {
-    info: {
-      title: "Cek IGN",
-      description: "Dokumentasi + Playground",
-      version: "1.0.0",
+  openapi: {
+    enabled: true,
+    scalar: {
+      hideModels: true,
+      operationTitleSource: "path",
+      orderSchemaPropertiesBy: "preserve",
     },
-    servers: [
-      {
-        url: `http://localhost:${port}`,
+    documentation: {
+      info: {
+        version: "1.0.0",
+        title: "Dokumentasi API - Cek IGN",
+        description: "Tool untuk ngecek In-Game Name berbagai game online",
       },
-    ],
+    },
+    exclude: {
+      paths: ["/"],
+    },
   },
-  exclude: ["/spec"],
-};
+} satisfies Config;

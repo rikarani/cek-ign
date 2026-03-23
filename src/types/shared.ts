@@ -1,6 +1,7 @@
-export type Response = {
+export type CodashopResponse = {
   initCallBackendAPI: boolean;
   orderId: string;
+  is_publisher_validate_error: boolean;
   errorCode: string;
   confirmation: boolean;
   isUserConfirmation: boolean;
@@ -12,12 +13,10 @@ export type Response = {
     zipCode: string;
     country: string;
     totalPrice: string;
-    create_role_country: string;
     userIdAndZoneId: string;
     userId: string;
     productName: string;
     paymentChannel: string;
-    this_login_country: string;
     channelPrice: string;
     price: string;
     zoneId: string;
