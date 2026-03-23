@@ -1,4 +1,4 @@
-import { Static, t } from "elysia";
+import { t } from "elysia";
 
 const success = t.Partial(
   t.Object(

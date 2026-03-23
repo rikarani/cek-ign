@@ -1,10 +1,10 @@
 import type { UnwrapSchema } from "elysia";
 
-import type { Response } from "@/types/helper";
-import type { CodashopResponse } from "@/types/shared";
+import type { Response } from "../types/helper";
+import type { CodashopResponse } from "../types/shared";
 
 import { model } from "./model";
-import { ExternalServerError, AccountNotFoundError } from "@/utils/errors";
+import { ExternalServerError, AccountNotFoundError } from "../utils/errors";
 
 type Success = UnwrapSchema<typeof model.response.success>;
 
