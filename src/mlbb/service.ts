@@ -29,11 +29,11 @@ export abstract class Mlbb {
       }),
     });
 
-    const data: Pick<CodashopResponse, "success" | "confirmationFields"> = await hit.json();
-
     if (!hit.ok) {
       throw new ExternalServerError("Layanan Tidak Tersedia");
     }
+
+    const data: Pick<CodashopResponse, "success" | "confirmationFields"> = await hit.json();
 
     if (!data.success) {
       throw new AccountNotFoundError("Akun Tidak Ditemukan");
