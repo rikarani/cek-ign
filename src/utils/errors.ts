@@ -1,3 +1,5 @@
+import { StatusMap } from "elysia";
+
 abstract class CustomError extends Error {
   public abstract readonly code: string;
   public abstract readonly status: number;
@@ -18,10 +20,15 @@ abstract class CustomError extends Error {
 
 export class ExternalServerError extends CustomError {
   public code: string = "EXTERNAL_SERVER_ERROR";
-  public status: number = 503;
+  public status: number = StatusMap["Service Unavailable"];
 }
 
 export class AccountNotFoundError extends CustomError {
   public code: string = "ACCOUNT_NOT_FOUND";
-  public status: number = 404;
+  public status: number = StatusMap["Not Found"];
+}
+
+export class InvalidAccountError extends CustomError {
+  public code: string = "INVALID_ACCOUNT";
+  public status: number = StatusMap["Unprocessable Content"];
 }
