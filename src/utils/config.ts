@@ -20,6 +20,10 @@ export const config = {
       hideModels: true,
       operationTitleSource: "path",
       orderSchemaPropertiesBy: "preserve",
+      defaultHttpClient: {
+        targetKey: "js",
+        clientKey: "fetch",
+      },
     },
     documentation: {
       info: {
