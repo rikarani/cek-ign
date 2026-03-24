@@ -5,11 +5,12 @@ import { openapi } from "@elysiajs/openapi";
 import { config } from "./utils/config";
 
 import mlbb from "./mlbb";
+import genshin from "./genshin";
 
 const app = new Elysia()
   .use(cors(config.cors))
   .use(openapi(config.openapi))
-  .group("/api", (app) => app.use(mlbb))
+  .group("/api", (app) => app.use(mlbb).use(genshin))
   .get("/", ({ redirect }) => redirect("/openapi"));
 
 if (process.env.NODE_ENV !== "production") {
