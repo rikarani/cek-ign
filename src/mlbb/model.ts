@@ -53,23 +53,21 @@ const badRequest = t.Partial(
     },
     {
       description: "Salah Format Request",
-      examples: [
-        {
-          success: false,
-          errors: [
-            {
-              path: "/id",
-              message: "Expected string",
-              summary: "Expected property 'id' to be string but found: undefined",
-            },
-            {
-              path: "/zone",
-              message: "Expected string",
-              summary: "Expected property 'zone' to be string but found: undefined",
-            },
-          ],
-        },
-      ],
+      example: {
+        success: false,
+        errors: [
+          {
+            path: "/id",
+            message: "Expected string",
+            summary: "Expected property 'id' to be string but found: undefined",
+          },
+          {
+            path: "/zone",
+            message: "Expected string",
+            summary: "Expected property 'zone' to be string but found: undefined",
+          },
+        ],
+      },
     },
   ),
 );
@@ -132,11 +130,11 @@ export const model = {
   query: t.Object({
     id: t.String({
       description: "ID Akun yang mau dicek",
-      example: "469123581",
+      example: "471192087",
     }),
     zone: t.String({
       description: "Zone Akun yang mau dicek",
-      example: "2418",
+      example: "2416",
     }),
   }),
   response: { success, badRequest, notFound, serviceUnavailable },
