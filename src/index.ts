@@ -2,10 +2,10 @@ import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
 import { openapi } from "@elysiajs/openapi";
 
-import { config } from "./utils/config";
+import { config } from "./utils/config.js";
 
-import mlbb from "./mlbb";
-import genshin from "./genshin";
+import mlbb from "./mlbb/index.js";
+import genshin from "./genshin/index.js";
 
 const app = new Elysia()
   .use(cors(config.cors))
