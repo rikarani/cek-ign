@@ -1,15 +1,15 @@
 import type { UnwrapSchema } from "elysia";
 
-import type { Response } from "../types/helper";
-import type { CodashopResponse } from "../types/shared";
+import type { Response } from "../types/helper.js";
+import type { CodashopResponse } from "../types/shared.js";
 
-import { model } from "./model";
-import { ExternalServerError, AccountNotFoundError } from "../utils/errors";
+import { Model } from "./model.js";
+import { ExternalServerError, AccountNotFoundError } from "../utils/errors.js";
 
-type Success = UnwrapSchema<typeof model.response.success>;
+type Success = UnwrapSchema<ReturnType<typeof Model.success>>;
 
 export abstract class Mlbb {
-  public static async check({ id, zone }: UnwrapSchema<typeof model.query>): Promise<Response<Success>> {
+  public static async check({ id, zone }: UnwrapSchema<ReturnType<typeof Model.query>>): Promise<Response<Success>> {
     const hit = await fetch("https://order-sg.codashop.com/initPayment.action", {
       method: "POST",
       headers: {
@@ -29,11 +29,11 @@ export abstract class Mlbb {
       }),
     });
 
-    const data: Pick<CodashopResponse, "success" | "confirmationFields"> = await hit.json();
-
     if (!hit.ok) {
-      throw new ExternalServerError("Layanan Tidak Tersedia");
+      throw new ExternalServerError("Gagal melakukan request ke API Codashop");
     }
+
+    const data: Pick<CodashopResponse, "success" | "confirmationFields"> = await hit.json();
 
     if (!data.success) {
       throw new AccountNotFoundError("Akun Tidak Ditemukan");
@@ -46,7 +46,7 @@ export abstract class Mlbb {
         account: {
           id,
           zone,
-          ign: data.confirmationFields.username,
+          ign: decodeURIComponent(data.confirmationFields.username),
         },
       },
     };

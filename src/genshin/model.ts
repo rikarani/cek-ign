@@ -3,14 +3,7 @@ import { t } from "elysia";
 export abstract class Model {
   public static query() {
     return t.Object({
-      id: t.String({
-        description: "ID Akun yang mau dicek",
-        example: "471192087",
-      }),
-      zone: t.String({
-        description: "Zone Akun yang mau dicek",
-        example: "2416",
-      }),
+      uid: t.String({ description: "uid akun yang mau dicari", example: "800029362" }),
     });
   }
 
@@ -21,15 +14,17 @@ export abstract class Model {
           success: t.Literal(true),
           data: t.Partial(
             t.Object({
-              game: t.String({ description: "Game yang di-request" }),
+              game: t.String({ description: "game yang direquest" }),
               account: t.Partial(
                 t.Object(
                   {
-                    id: t.String({ description: "ID yang tadi dimasukkan" }),
-                    zone: t.String({ description: "Zone yang tadi dimasukkan" }),
-                    ign: t.String({ description: "In-Game Name" }),
+                    uid: t.String({ description: "uid akun yang dicari" }),
+                    server: t.String({ description: "server akun" }),
+                    ign: t.String({ description: "in-game name" }),
                   },
-                  { description: "Detail Akun" },
+                  {
+                    description: "detail akun",
+                  },
                 ),
               ),
             }),
@@ -40,11 +35,11 @@ export abstract class Model {
           example: {
             success: true,
             data: {
-              game: "Mobile Legends: Bang Bang",
+              game: "Genshin Impact",
               account: {
-                id: "471192087",
-                zone: "2416",
-                ign: "Sa2-3",
+                uid: "800029362",
+                server: "Asia",
+                ign: "A***a",
               },
             },
           },
@@ -69,19 +64,14 @@ export abstract class Model {
           ),
         },
         {
-          description: "salah format request",
+          description: "lupa ngirim UID",
           example: {
             success: false,
             errors: [
               {
-                path: "/id",
+                path: "/uid",
                 message: "Expected string",
-                summary: "Expected property 'id' to be string but found: undefined",
-              },
-              {
-                path: "/zone",
-                message: "Expected string",
-                summary: "Expected property 'zone' to be string but found: undefined",
+                summary: "Expected property 'uid' to be string but found: undefined",
               },
             ],
           },
@@ -96,22 +86,45 @@ export abstract class Model {
         {
           success: t.Literal(false),
           error: t.Partial(
-            t.Object(
-              {
-                code: t.String({ description: "Kode Error" }),
-                message: t.String({ description: "Pesan Kesalahan" }),
-              },
-              { description: "Detail Error" },
-            ),
+            t.Object({
+              code: t.String({ description: "kode error" }),
+              message: t.String({ description: "pesan error" }),
+            }),
           ),
         },
         {
-          description: "akun gak ketemu",
+          description: "akun nda ketemu",
           example: {
             success: false,
             error: {
               code: "ACCOUNT_NOT_FOUND",
               message: "Akun Tidak Ditemukan",
+            },
+          },
+        },
+      ),
+    );
+  }
+
+  public static wrongUid() {
+    return t.Partial(
+      t.Object(
+        {
+          success: t.Literal(false),
+          error: t.Partial(
+            t.Object({
+              code: t.String({ description: "kode error" }),
+              message: t.String({ description: "pesan error" }),
+            }),
+          ),
+        },
+        {
+          description: "format uid nguwawor",
+          example: {
+            success: false,
+            error: {
+              code: "INVALID_UID",
+              message: "Masukkan UID yang bener",
             },
           },
         },
@@ -125,13 +138,10 @@ export abstract class Model {
         {
           success: t.Literal(false),
           error: t.Partial(
-            t.Object(
-              {
-                code: t.String({ description: "Kode Error" }),
-                message: t.String({ description: "Pesan Kesalahan" }),
-              },
-              { description: "Detail Error" },
-            ),
+            t.Object({
+              code: t.String({ description: "kode error" }),
+              message: t.String({ description: "pesan error" }),
+            }),
           ),
         },
         {

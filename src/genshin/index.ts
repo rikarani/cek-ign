@@ -1,14 +1,15 @@
 import { Elysia } from "elysia";
 
 import { Model } from "./model.js";
-import { Mlbb } from "./service.js";
+import { Genshin } from "./service.js";
 
-export default new Elysia().get("/mlbb", ({ query: { id, zone } }) => Mlbb.check({ id, zone }), {
+export default new Elysia().get("/genshin", ({ query: { uid } }) => Genshin.check({ uid }), {
   query: Model.query(),
   response: {
     200: Model.success(),
     400: Model.badRequest(),
     404: Model.notFound(),
+    422: Model.wrongUid(),
     503: Model.serverError(),
   },
   error({ code, error, set }) {
@@ -18,19 +19,19 @@ export default new Elysia().get("/mlbb", ({ query: { id, zone } }) => Mlbb.check
       return {
         success: false,
         errors: error.all
-          .filter((error) => error.type === 54)
-          .map((error) => {
+          .filter((e) => e.type === 54)
+          .map((e) => {
             return {
-              path: error.path,
-              message: error.message,
-              summary: error.summary,
+              path: e.path,
+              message: e.message,
+              summary: e.summary,
             };
           }),
       };
     }
   },
   detail: {
-    summary: "Mobile Legends: Bang-Bang",
-    description: "game kikir dari munton",
+    summary: "Genshin Impact",
+    description: "game kikir dari hoyopers",
   },
 });
