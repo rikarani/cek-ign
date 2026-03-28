@@ -2,10 +2,10 @@ import type { UnwrapSchema } from "elysia";
 import type { Response } from "../types/helper.js";
 import type { CodashopResponse } from "../types/shared.js";
 
-import { model } from "./model.js";
-import { ExternalServerError, AccountNotFoundError, InvalidAccountError } from "../utils/errors.js";
+import { Model } from "./model.js";
+import { ExternalServerError, AccountNotFoundError, InvalidUidError } from "../utils/errors.js";
 
-type Success = UnwrapSchema<typeof model.response.success>;
+type Success = UnwrapSchema<ReturnType<typeof Model.success>>;
 
 export abstract class Genshin {
   private static server = {
@@ -15,7 +15,7 @@ export abstract class Genshin {
     Other: "os_ok",
   } as const;
 
-  public static async check({ uid }: UnwrapSchema<typeof model.query>): Promise<Response<Success>> {
+  public static async check({ uid }: UnwrapSchema<ReturnType<typeof Model.query>>): Promise<Response<Success>> {
     const hit = await fetch("https://order-sg.codashop.com/initPayment.action", {
       method: "POST",
       headers: {
@@ -36,20 +36,17 @@ export abstract class Genshin {
     });
 
     if (!hit.ok) {
-      throw new ExternalServerError("Request ke API Codashop Gagal");
+      throw new ExternalServerError("Gagal melakukan request ke API Codashop");
     }
 
-    const data: Pick<CodashopResponse, "is_publisher_validate_error" | "errorCode" | "confirmationFields"> =
-      await hit.json();
+    const data: Pick<CodashopResponse, "errorCode" | "confirmationFields"> = await hit.json();
 
-    if (data.is_publisher_validate_error) {
-      if (data.errorCode === "-100") {
-        throw new AccountNotFoundError("Akun Tidak Ditemukan");
-      }
+    if (data.errorCode === "-100") {
+      throw new AccountNotFoundError("Akun Tidak Ditemukan");
+    }
 
-      if (data.errorCode === "-200") {
-        throw new ExternalServerError("Ada Kesalahan di API Codashop");
-      }
+    if (data.errorCode === "-200") {
+      throw new ExternalServerError("Kesalahan Region");
     }
 
     return {
@@ -58,7 +55,7 @@ export abstract class Genshin {
         game: data.confirmationFields.productName,
         account: {
           uid,
-          server: this.getKeyByValue(data.confirmationFields.zoneId),
+          server: this.getServerByCode(data.confirmationFields.zoneId),
           ign: decodeURIComponent(data.confirmationFields.username),
         },
       },
@@ -82,10 +79,10 @@ export abstract class Genshin {
       return this.server.Other;
     }
 
-    throw new InvalidAccountError("Masukkan UID yang bener");
+    throw new InvalidUidError("Masukkan UID yang bener");
   }
 
-  private static getKeyByValue(server: string): string {
+  private static getServerByCode(server: string): string {
     return Object.keys(this.server).find((x) => this.server[x as keyof typeof this.server] === server)!;
   }
 }
