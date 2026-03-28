@@ -18,7 +18,7 @@ export const config = {
     enabled: true,
     scalar: {
       hideModels: true,
-      operationTitleSource: "path",
+      operationTitleSource: "summary",
       orderSchemaPropertiesBy: "preserve",
       defaultHttpClient: {
         targetKey: "js",
@@ -27,7 +27,7 @@ export const config = {
     },
     documentation: {
       info: {
-        version: "1.0.0",
+        version: "0.2.0",
         title: "Dokumentasi API - Cek IGN",
         description: "Tool untuk ngecek In-Game Name berbagai game online",
       },
