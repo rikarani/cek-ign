@@ -28,7 +28,7 @@ export class AccountNotFoundError extends CustomError {
   public status: number = StatusMap["Not Found"];
 }
 
-export class InvalidAccountError extends CustomError {
-  public code: string = "INVALID_ACCOUNT";
+export class InvalidUidError extends CustomError {
+  public code: string = "INVALID_UID";
   public status: number = StatusMap["Unprocessable Content"];
 }
