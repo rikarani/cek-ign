@@ -1,42 +1,30 @@
 import type { UnwrapSchema } from "elysia";
 
 import type { Response } from "../types/helper.js";
-import type { CodashopResponse } from "../types/shared.js";
 
 import { Model } from "./model.js";
-import { ExternalServerError, AccountNotFoundError } from "../utils/errors.js";
+import { Fetcher } from "../utils/fetcher.js";
+import { AccountNotFoundError } from "../utils/errors.js";
 
-type Success = UnwrapSchema<ReturnType<typeof Model.success>>;
+type Success = UnwrapSchema<typeof Model.success>;
 
 export abstract class Mlbb {
-  public static async check({ id, zone }: UnwrapSchema<ReturnType<typeof Model.query>>): Promise<Response<Success>> {
-    const hit = await fetch("https://order-sg.codashop.com/initPayment.action", {
-      method: "POST",
-      headers: {
-        Origin: "https://www.codashop.com",
-        Referer: "https://www.codashop.com",
-        "Content-Type": "application/x-www-form-urlencoded",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0",
+  public static async check({ id, zone }: UnwrapSchema<typeof Model.query>): Promise<Response<Success>> {
+    const data = await Fetcher.codashop({
+      vpp: {
+        id: "27684",
+        price: "527250",
+        vp: "0",
       },
-      body: new URLSearchParams({
-        "voucherPricePoint.id": "27684",
-        "voucherPricePoint.price": "527250",
-        "voucherPricePoint.variablePrice": "0",
-        "user.userId": id,
-        "user.zoneId": zone,
-        voucherTypeName: "MOBILE_LEGENDS",
-        shopLang: "id_ID",
-      }),
+      user: {
+        userId: id,
+        zoneId: zone,
+      },
+      voucherTypeName: "MOBILE_LEGENDS",
     });
 
-    if (!hit.ok) {
-      throw new ExternalServerError("Gagal melakukan request ke API Codashop");
-    }
-
-    const data: Pick<CodashopResponse, "success" | "confirmationFields"> = await hit.json();
-
     if (!data.success) {
-      throw new AccountNotFoundError("Akun Tidak Ditemukan");
+      throw new AccountNotFoundError();
     }
 
     return {
