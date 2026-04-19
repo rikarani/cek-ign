@@ -11,7 +11,6 @@ export const Model = {
       example: "2416",
     }),
   }),
-
   success: t.Partial(
     t.Object(
       {
@@ -48,7 +47,6 @@ export const Model = {
       },
     ),
   ),
-
   badRequest: t.Partial(
     t.Object(
       {
