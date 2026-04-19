@@ -2,14 +2,15 @@ import { Elysia } from "elysia";
 
 import { Model } from "./model.js";
 import { Mlbb } from "./service.js";
+import { Error } from "../utils/model.js";
 
 export default new Elysia().get("/mlbb", ({ query: { id, zone } }) => Mlbb.check({ id, zone }), {
-  query: Model.query(),
+  query: Model.query,
   response: {
-    200: Model.success(),
-    400: Model.badRequest(),
-    404: Model.notFound(),
-    503: Model.serverError(),
+    200: Model.success,
+    400: Model.badRequest,
+    404: Error.notFound,
+    503: Error.serverError,
   },
   error({ code, error, set }) {
     if (code === "VALIDATION") {
