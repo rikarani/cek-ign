@@ -34,7 +34,7 @@ export abstract class Mlbb {
         account: {
           id,
           zone,
-          ign: decodeURIComponent(data.confirmationFields.username),
+          ign: decodeURIComponent(data.confirmationFields.username).replace(/\+/g, " "),
         },
       },
     };
