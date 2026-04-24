@@ -32,6 +32,7 @@ export default new Elysia().get("/mlbb", ({ query: { id, zone } }) => Mlbb.check
   },
   detail: {
     summary: "Mobile Legends: Bang-Bang",
-    description: "game kikir dari munton",
+    description:
+      "Permainan video seluler bergenre multiplayer online battle arena yang dikembangkan dan diterbitkan oleh Moonton, anak perusahaan dari ByteDance",
   },
 });
