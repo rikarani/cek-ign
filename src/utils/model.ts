@@ -104,12 +104,12 @@ export const Error = {
         ),
       },
       {
-        description: "ada error di API Codashop",
+        description: "ada error di server",
         example: {
           success: false,
           error: {
             code: "EXTERNAL_SERVER_ERROR",
-            message: "Gagal melakukan request ke API Codashop",
+            message: "Kesalahan saat melakukan request ke API Codashop",
           },
         },
       },
