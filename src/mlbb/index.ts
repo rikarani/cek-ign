@@ -32,6 +32,7 @@ export default new Elysia().get("/mlbb", ({ query: { id, zone } }) => Mlbb.check
   },
   detail: {
     summary: "Mobile Legends: Bang-Bang",
-    description: "Game mobile bergenre multiplayer online battle arena yang dikembangkan dan diterbitkan oleh Moonton",
+    description:
+      "game MOBA mobile yang dikembangkan oleh Moonton, di mana pemain bertarung dalam tim 5v5 untuk menghancurkan base lawan dengan strategi, kerja sama, dan pemilihan hero yang tepat",
   },
 });
