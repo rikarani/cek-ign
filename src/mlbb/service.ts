@@ -11,15 +11,8 @@ type Success = UnwrapSchema<typeof Model.success>;
 export abstract class Mlbb {
   public static async check({ id, zone }: UnwrapSchema<typeof Model.query>): Promise<Response<Success>> {
     const data = await Fetcher.codashop({
-      vpp: {
-        id: "27684",
-        price: "527250",
-        vp: "0",
-      },
-      user: {
-        userId: id,
-        zoneId: zone,
-      },
+      vpp: { id: "27684", price: "527250", vp: "0" },
+      user: { userId: id, zoneId: zone },
       voucherTypeName: "MOBILE_LEGENDS",
     });
 
