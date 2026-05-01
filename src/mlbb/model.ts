@@ -1,47 +1,25 @@
 import { t } from "elysia";
 
-import { Error } from "../utils/model.js";
+import { Model as BaseModel, Error } from "../utils/model.js";
 
 export const Model = {
-  query: t.Object({
+  query: BaseModel.query({
     id: t.String({ description: "ID akun yang mau dicek", example: "471192087" }),
     zone: t.String({ description: "Zone akun yang mau dicek", example: "2416" }),
   }),
-  success: t.Partial(
-    t.Object(
-      {
-        success: t.Literal(true, { description: "status" }),
-        data: t.Partial(
-          t.Object({
-            game: t.String({ description: "game yang di-request" }),
-            account: t.Partial(
-              t.Object(
-                {
-                  id: t.String({ description: "ID akun" }),
-                  zone: t.String({ description: "Zone akun" }),
-                  ign: t.String({ description: "in-game name" }),
-                },
-                { description: "detail akun" },
-              ),
-            ),
-          }),
-        ),
+  success: BaseModel.success(
+    {
+      id: t.String({ description: "ID akun" }),
+      zone: t.String({ description: "Zone akun" }),
+    },
+    {
+      game: "Mobile Legends: Bang Bang",
+      account: {
+        id: "471192087",
+        zone: "2416",
+        ign: "Sa2-3",
       },
-      {
-        description: "akun yang dicari ketemu",
-        example: {
-          success: true,
-          data: {
-            game: "Mobile Legends: Bang Bang",
-            account: {
-              id: "471192087",
-              zone: "2416",
-              ign: "Sa2-3",
-            },
-          },
-        },
-      },
-    ),
+    },
   ),
   badRequest: Error.badRequest([
     {
