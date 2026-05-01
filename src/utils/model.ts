@@ -1,13 +1,48 @@
-import { t } from "elysia";
+import { t, TSchema, Static } from "elysia";
 
-type Example = {
+type BadRequestExample = {
   path: string;
   message: string;
   summary: string;
 };
 
+type SuccessExample<T extends Record<string, TSchema>> = {
+  game: string;
+  account: { [K in keyof T]: Static<T[K]> } & { ign: string };
+};
+
+export const Model = {
+  query<T extends Record<string, TSchema>>(schema: T) {
+    return t.Object(schema);
+  },
+  success<T extends Record<string, TSchema>>(schema: T, example: SuccessExample<T>) {
+    return t.Partial(
+      t.Object(
+        {
+          success: t.Literal(true, { description: "status" }),
+          data: t.Partial(
+            t.Object({
+              game: t.String({ description: "game yang di-request" }),
+              account: t.Partial(
+                t.Object({ ...schema, ign: t.String({ description: "in-game name" }) }, { description: "detail akun" }),
+              ),
+            }),
+          ),
+        },
+        {
+          description: "akun yang dicari ketemu",
+          example: {
+            success: true,
+            data: example,
+          },
+        },
+      ),
+    );
+  },
+};
+
 export const Error = {
-  badRequest: (example: Example[]) => {
+  badRequest: (example: BadRequestExample[]) => {
     return t.Partial(
       t.Object(
         {
