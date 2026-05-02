@@ -30,7 +30,7 @@ export abstract class Genshin {
         account: {
           uid,
           server: this.getServerByCode(data.confirmationFields.zoneId),
-          ign: decodeURIComponent(data.confirmationFields.username).replace("/\+/g", " "),
+          ign: decodeURIComponent(data.confirmationFields.username).replace(/\+/g, " "),
         },
       },
     };
