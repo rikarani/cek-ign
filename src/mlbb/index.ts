@@ -2,14 +2,15 @@ import { Elysia } from "elysia";
 
 import { Model } from "./model.js";
 import { Mlbb } from "./service.js";
+import { Error } from "../utils/model.js";
 
 export default new Elysia().get("/mlbb", ({ query: { id, zone } }) => Mlbb.check({ id, zone }), {
-  query: Model.query(),
+  query: Model.query,
   response: {
-    200: Model.success(),
-    400: Model.badRequest(),
-    404: Model.notFound(),
-    503: Model.serverError(),
+    200: Model.success,
+    400: Model.badRequest,
+    404: Error.notFound,
+    503: Error.serverError,
   },
   error({ code, error, set }) {
     if (code === "VALIDATION") {
@@ -31,6 +32,7 @@ export default new Elysia().get("/mlbb", ({ query: { id, zone } }) => Mlbb.check
   },
   detail: {
     summary: "Mobile Legends: Bang-Bang",
-    description: "game kikir dari munton",
+    description:
+      "game MOBA mobile yang dikembangkan oleh Moonton, di mana pemain bertarung dalam tim 5v5 untuk menghancurkan base lawan dengan strategi, kerja sama, dan pemilihan hero yang tepat",
   },
 });

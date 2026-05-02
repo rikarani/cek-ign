@@ -17,6 +17,8 @@ export const config = {
   openapi: {
     enabled: true,
     scalar: {
+      theme: "deepSpace",
+      customCss: "",
       hideModels: true,
       operationTitleSource: "summary",
       orderSchemaPropertiesBy: "preserve",
@@ -29,7 +31,7 @@ export const config = {
       info: {
         version: "0.2.0",
         title: "Dokumentasi API - Cek IGN",
-        description: "Tool untuk ngecek In-Game Name berbagai game online",
+        description: "ini cuma wrapper buat API Codashop",
       },
     },
     exclude: {
