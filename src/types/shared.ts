@@ -25,8 +25,8 @@ export type CodashopResponse = {
     totalPrice: string;
     roles: Role[];
     userIdAndZoneId: string;
-    message: string;
-    error: string;
+    message?: string;
+    error?: string;
     userId: string;
     productName: string;
     paymentChannel: string;
@@ -38,7 +38,7 @@ export type CodashopResponse = {
     taxAmount: string;
     email: string;
     inputRoleId: string;
-    username: string;
+    username?: string;
   };
   success: boolean;
   denom: string;
