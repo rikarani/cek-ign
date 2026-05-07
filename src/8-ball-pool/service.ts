@@ -6,10 +6,8 @@ import { AccountNotFoundError } from "../utils/errors.js";
 
 import { Response } from "../types/helper.js";
 
-type Success = UnwrapSchema<typeof Model.success>;
-
 export const EightBallPool = {
-  async check({ id }: UnwrapSchema<typeof Model.query>): Promise<Response<Success>> {
+  async check({ id }: UnwrapSchema<typeof Model.query>): Promise<Response<UnwrapSchema<typeof Model.success>>> {
     const data = await Fetcher.codashop({
       vpp: { id: "205678", price: "140000", vp: "0" },
       user: { userId: id, zoneId: "" },
