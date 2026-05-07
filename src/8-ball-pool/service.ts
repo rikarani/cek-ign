@@ -16,7 +16,7 @@ export const EightBallPool = {
       voucherTypeName: "EIGHT_BALL_POOL",
     });
 
-    if (data.errorCode == "-100") {
+    if (data.errorCode === "-100") {
       throw new AccountNotFoundError();
     }
 
