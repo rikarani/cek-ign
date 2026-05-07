@@ -32,8 +32,8 @@ export const Fetcher = {
         "voucherPricePoint.variablePrice": vpp.vp,
         "user.userId": user.userId,
         "user.zoneId": user.zoneId,
-        voucherTypeName: voucherTypeName,
-        shopLang: shopLang,
+        voucherTypeName,
+        shopLang,
       }),
     });
 

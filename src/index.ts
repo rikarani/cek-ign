@@ -4,13 +4,12 @@ import { openapi } from "@elysiajs/openapi";
 
 import { config } from "./utils/config.js";
 
-import mlbb from "./mlbb/index.js";
-import genshin from "./genshin/index.js";
+import eightBallPool from "./8-ball-pool/index.js";
 
 const app = new Elysia()
   .use(cors(config.cors))
   .use(openapi(config.openapi))
-  .group("/api", (app) => app.use(mlbb).use(genshin))
+  .group("/api", (app) => app.use(eightBallPool))
   .get("/", ({ redirect }) => redirect("/openapi"));
 
 if (process.env.NODE_ENV !== "production") {

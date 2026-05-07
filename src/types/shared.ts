@@ -1,3 +1,13 @@
+type Role = {
+  packed_role_id: string;
+  server: string;
+  role: string;
+  role_id: string;
+  client_type: string;
+  server_id: string;
+  app_identifier: string;
+};
+
 export type CodashopResponse = {
   initCallBackendAPI: boolean;
   orderId: string;
@@ -13,7 +23,10 @@ export type CodashopResponse = {
     zipCode: string;
     country: string;
     totalPrice: string;
+    roles: Role[];
     userIdAndZoneId: string;
+    message: string;
+    error: string;
     userId: string;
     productName: string;
     paymentChannel: string;
