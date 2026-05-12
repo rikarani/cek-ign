@@ -5,11 +5,12 @@ import { openapi } from "@elysiajs/openapi";
 import { config } from "./utils/config.js";
 
 import eightBallPool from "./8-ball-pool/index.js";
+import aov from "./arena-of-valor/index.js";
 
 const app = new Elysia()
   .use(cors(config.cors))
   .use(openapi(config.openapi))
-  .group("/api", (app) => app.use(eightBallPool))
+  .group("/api", (app) => app.use(eightBallPool).use(aov))
   .get("/", ({ redirect }) => redirect("/openapi"));
 
 if (process.env.NODE_ENV !== "production") {
