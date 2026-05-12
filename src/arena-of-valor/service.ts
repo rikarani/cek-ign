@@ -11,7 +11,7 @@ export const ArenaOfValor = {
   async check({ id }: UnwrapSchema<typeof Model.query>): Promise<Response<UnwrapSchema<typeof Model.success>>> {
     const data = await Fetcher.codashop({
       vpp: { id: "8003", price: "300000", vp: "0" },
-      user: { userId: `${id}`, zoneId: "" },
+      user: { userId: id, zoneId: "" },
       voucherTypeName: "AOV",
     });
 
