@@ -4,7 +4,7 @@ import { Error, Model as BaseModel } from "../utils/model.js";
 
 export const Model = {
   query: BaseModel.query({
-    id: t.String({ description: "ID akun yang mau dicek", example: "2180533717" }),
+    id: t.String({ pattern: "^[0-9]+$", description: "ID akun yang mau dicek", example: "2180533717" }),
   }),
   success: BaseModel.success(
     {

@@ -18,15 +18,11 @@ export default new Elysia().get("/8-ball-pool", ({ query: { id } }) => EightBall
 
       return {
         success: false,
-        errors: error.all
-          .filter((e) => e.type === 54)
-          .map((e) => {
-            return {
-              path: e.path,
-              message: e.message,
-              summary: e.summary,
-            };
-          }),
+        errors: error.all.map((e) => ({
+          path: e.path,
+          message: e.message,
+          summary: e.summary,
+        })),
       };
     }
   },
