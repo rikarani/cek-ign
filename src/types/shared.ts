@@ -12,7 +12,7 @@ export type CodashopResponse = {
   initCallBackendAPI: boolean;
   orderId: string;
   is_publisher_validate_error: boolean;
-  errorCode: string;
+  errorCode: string | number;
   confirmation: boolean;
   isUserConfirmation: boolean;
   errorMsg: string;

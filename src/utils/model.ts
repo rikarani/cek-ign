@@ -1,4 +1,4 @@
-import { t, TSchema, Static } from "elysia";
+import { t, TSchema, UnwrapSchema } from "elysia";
 
 type BadRequestExample = {
   path: string;
@@ -8,7 +8,7 @@ type BadRequestExample = {
 
 type SuccessExample<T extends Record<string, TSchema>> = {
   game: string;
-  account: { [K in keyof T]: Static<T[K]> } & { ign: string };
+  account: { [K in keyof T]: UnwrapSchema<T[K]> } & { ign: string };
 };
 
 export const Model = {

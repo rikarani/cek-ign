@@ -1,20 +1,20 @@
 import { t } from "elysia";
 
-import { Error, Model as BaseModel } from "../utils/model.js";
+import { Model as BaseModel, Error } from "../utils/model.js";
 
 export const Model = {
   query: BaseModel.query({
-    id: t.String({ pattern: "^[0-9]+$", description: "ID akun yang mau dicek", example: "2180533717" }),
+    id: t.String({ pattern: "^[0-9]+$", description: "ID akun yang mau dicek", example: "888347346994333" }),
   }),
   success: BaseModel.success(
     {
-      id: t.String({ description: "ID akun", example: "2180533717" }),
+      id: t.String({ description: "ID akun" }),
     },
     {
-      game: "8 Ball Pool",
+      game: "Arena of Valor",
       account: {
-        id: "2180533717",
-        ign: "J**n S***c",
+        id: "888347346994333",
+        ign: "BangRams",
       },
     },
   ),
