@@ -1,13 +1,3 @@
-type Role = {
-  packed_role_id: string;
-  server: string;
-  role: string;
-  role_id: string;
-  client_type: string;
-  server_id: string;
-  app_identifier: string;
-};
-
 export type CodashopResponse = {
   initCallBackendAPI: boolean;
   orderId: string;
@@ -23,7 +13,15 @@ export type CodashopResponse = {
     zipCode: string;
     country: string;
     totalPrice: string;
-    roles: Role[];
+    roles: {
+      packed_role_id: string;
+      server: string;
+      role: string;
+      role_id: string;
+      client_type: string;
+      server_id: string;
+      app_identifier: string;
+    }[];
     userIdAndZoneId: string;
     message: string;
     error: string;
@@ -48,4 +46,17 @@ export type CodashopResponse = {
   };
   isThirdPartyMerchant: boolean;
   txnId: string;
+};
+
+export type DancingIdolResponse = {
+  code: number;
+  msgCode: number;
+  data: {
+    account: number;
+    roleId: number;
+    rolename: string;
+    validate: number;
+  };
+  msg: string;
+  timestamp: number;
 };
