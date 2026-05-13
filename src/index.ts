@@ -7,11 +7,12 @@ import { config } from "./utils/config.js";
 import eightBallPool from "./8-ball-pool/index.js";
 import aov from "./arena-of-valor/index.js";
 import asphalt9Legends from "./asphalt-9-legends/index.js";
+import au2 from "./au2/index.js";
 
 const app = new Elysia()
   .use(cors(config.cors))
   .use(openapi(config.openapi))
-  .group("/api", (app) => app.use(eightBallPool).use(aov).use(asphalt9Legends))
+  .group("/api", (app) => app.use(eightBallPool).use(aov).use(asphalt9Legends).use(au2))
   .get("/", ({ redirect }) => redirect("/openapi"));
 
 if (process.env.NODE_ENV !== "production") {
