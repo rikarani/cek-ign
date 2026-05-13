@@ -8,7 +8,7 @@ export const Model = {
   }),
   success: BaseModel.success(
     {
-      id: t.String({ description: "ID akun" }),
+      id: t.String({ description: "ID akun yang dicari" }),
     },
     {
       game: "Arena of Valor",
