@@ -1,8 +1,9 @@
 import { Elysia } from "elysia";
 
 import { Model } from "./model.js";
-import { Error } from "../utils/model.js";
 import { EightBallPool } from "./service.js";
+
+import { Error } from "../utils/model.js";
 
 export default new Elysia().get("/8-ball-pool", ({ query: { id } }) => EightBallPool.check({ id }), {
   query: Model.query,
