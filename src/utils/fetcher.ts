@@ -1,4 +1,4 @@
-import { CodashopResponse } from "../types/shared.js";
+import { CodashopResponse, DancingIdolResponse } from "../types/shared.js";
 import { ExternalServerError } from "./errors.js";
 
 type Codashop = {
@@ -35,6 +35,21 @@ export const Fetcher = {
         voucherTypeName,
         shopLang,
       }),
+    });
+
+    if (!hit.ok) {
+      throw new ExternalServerError();
+    }
+
+    return await hit.json();
+  },
+  async dancingIdol(id: string): Promise<DancingIdolResponse> {
+    const hit = await fetch(`http://dancingidol.uniuhk.com/api/role/info?roleId=${id}`, {
+      method: "GET",
+      headers: {
+        Host: "dancingidol.uniuhk.com",
+        Referer: "http://dancingidol.uniuhk.com/payment",
+      },
     });
 
     if (!hit.ok) {
