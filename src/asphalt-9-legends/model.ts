@@ -5,7 +5,7 @@ import { Model as BaseModel, Error } from "../utils/model.js";
 export const Model = {
   query: BaseModel.query({
     id: t.String({ description: "ID akun", example: "3e031e" }),
-    platform: t.UnionEnum(["ios", "android", "windows"], { default: "ios", description: "Platform" }),
+    platform: t.UnionEnum(["ios", "android", "windows"], { description: "Platform" }),
   }),
   success: BaseModel.success(
     {
