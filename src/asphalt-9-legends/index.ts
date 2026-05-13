@@ -1,11 +1,11 @@
 import { Elysia } from "elysia";
 
 import { Model } from "./model.js";
-import { EightBallPool } from "./service.js";
+import { Asphalt9Legends } from "./service.js";
 
 import { Error } from "../utils/model.js";
 
-export default new Elysia().get("/8-ball-pool", ({ query: { id } }) => EightBallPool.check({ id }), {
+export default new Elysia().get("/asphalt-9-legends", ({ query }) => Asphalt9Legends.check(query), {
   query: Model.query,
   response: {
     200: Model.success,
@@ -13,7 +13,7 @@ export default new Elysia().get("/8-ball-pool", ({ query: { id } }) => EightBall
     404: Error.notFound,
     503: Error.serverError,
   },
-  error: ({ code, error, set }) => {
+  error({ error, code, set }) {
     if (code === "VALIDATION") {
       set.status = "Bad Request";
 
@@ -28,8 +28,8 @@ export default new Elysia().get("/8-ball-pool", ({ query: { id } }) => EightBall
     }
   },
   detail: {
-    summary: "8 Ball Pool",
+    summary: "Asphalt 9: Legends",
     description:
-      "game billiard online populer yang dikembangkan oleh Miniclip, di mana pemain bertanding secara real-time menggunakan aturan 8-ball klasik dengan mengandalkan akurasi dan strategi",
+      "game balap mobile yang dikembangkan oleh Gameloft, di mana pemain mengendarai mobil-mobil ikonik dari merek ternama dunia dalam balapan aksi penuh kecepatan dan trik udara spektakuler",
   },
 });
