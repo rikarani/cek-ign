@@ -21,7 +21,7 @@ abstract class CustomError extends Error {
 export class ExternalServerError extends CustomError {
   public code: string = "EXTERNAL_SERVER_ERROR";
   public status: number = StatusMap["Service Unavailable"];
-  public message: string = "Ada error di API Codashop";
+  public message: string = "Kesalahan saat melakukan request ke API eksternal";
 }
 
 export class AccountNotFoundError extends CustomError {

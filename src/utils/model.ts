@@ -144,7 +144,7 @@ export const Error = {
           success: false,
           error: {
             code: "EXTERNAL_SERVER_ERROR",
-            message: "Kesalahan saat melakukan request ke API Codashop",
+            message: "Kesalahan saat melakukan request ke API eksternal",
           },
         },
       },
