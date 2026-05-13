@@ -1,5 +1,5 @@
 > [!NOTE]
-dibutuhkan orang yang mau ngetes semua endpoint (karna ak gak mainin semua gamenya), bisa kontak di [Discord](https://google.com)
+> dibutuhkan orang yang mau ngetes semua endpoint (karna ak gak mainin semua gamenya), bisa kontak di [Discord](https://google.com)
 
 # List Game
 - [8 Ball Pool](https://cek-ign-eight.vercel.app/openapi#GET/api/8-ball-pool)
