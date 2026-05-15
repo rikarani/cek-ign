@@ -6,11 +6,8 @@
 - [Arena of Valor](https://cek-ign-eight.vercel.app/openapi#GET/api/arena-of-valor)
 - [Asphalt 9: Legends](https://cek-ign-eight.vercel.app/openapi#GET/api/asphalt-9-legends)
 - [AU2 Mobile](https://cek-ign-eight.vercel.app/openapi#GET/api/au2)
-- Auto Chess
-- Azur Lane
-- Badlanders
-- BarbarQ
-- Basketrio
+- [Auto Chess](https://cek-ign-eight.vercel.app/openapi#GET/api/auto-chess)
+- [Azur Lane](https://cek-ign-eight.vercel.app/openapi#GET/api/azur-lane)
 - Call of Duty Mobile
 - Captain Tsubasa: Dream Team
 - Crisis Action
@@ -46,3 +43,13 @@
 - War Planet Online
 - Watcher of Realms
 - ZEPETO
+
+---
+
+Azur Lane server
+Amagi => kode 5
+Avrora => kode 1
+Lexington => kode 2
+Little Enterprise => kode 6
+Sandy => kode 3
+Washington => kode 4
