@@ -1,11 +1,12 @@
 import { t } from "elysia";
 
 import { Model as BaseModel, Error } from "../utils/model.js";
+import { serverNames } from "./servers.js";
 
 export const Model = {
   query: BaseModel.query({
     id: t.String({ pattern: "^[0-9]+$", description: "ID akun", example: "271394707" }),
-    server: t.UnionEnum(["Avrora", "Lexington", "Sandy", "Washington", "Amagi", "Little Enterprise"], {
+    server: t.UnionEnum(serverNames, {
       description: "Server akun",
       default: "Washington",
     }),
@@ -13,7 +14,7 @@ export const Model = {
   success: BaseModel.success(
     {
       id: t.String({ description: "ID akun yang dicari" }),
-      server: t.UnionEnum(["Avrora", "Lexington", "Sandy", "Washington", "Amagi", "Little Enterprise"], {
+      server: t.UnionEnum(serverNames, {
         description: "Server akun yang dicari",
       }),
     },

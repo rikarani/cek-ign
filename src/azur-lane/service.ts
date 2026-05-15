@@ -1,20 +1,12 @@
 import { UnwrapSchema } from "elysia";
 
 import { Model } from "./model.js";
+import { servers, ServerName } from "./servers.js";
 
 import { Fetcher } from "../utils/fetcher.js";
 import { AccountNotFoundError } from "../utils/errors.js";
 
 import { Response } from "../types/helper.js";
-
-const servers = {
-  Avrora: "1",
-  Lexington: "2",
-  Sandy: "3",
-  Washington: "4",
-  Amagi: "5",
-  "Little Enterprise": "6",
-} as const;
 
 function keys<T extends object>(o: T) {
   return Object.keys(o) as Array<keyof T>;
@@ -38,7 +30,7 @@ export const AzurLane = {
         game: data.confirmationFields.productName,
         account: {
           id,
-          server: keys(servers).find((s) => servers[s] === data.user.zoneId) as keyof typeof servers,
+          server: keys(servers).find((s) => servers[s] === data.user.zoneId) as ServerName,
           ign: decodeURIComponent(data.confirmationFields.username).replace(/\+/g, " "),
         },
       },
