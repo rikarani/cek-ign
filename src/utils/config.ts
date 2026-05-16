@@ -29,7 +29,7 @@ export const config = {
     },
     documentation: {
       info: {
-        version: "0.1.0",
+        version: "0.6.0",
         title: "Dokumentasi API - Cek IGN",
         description: "ini cuma wrapper buat API Codashop",
       },
