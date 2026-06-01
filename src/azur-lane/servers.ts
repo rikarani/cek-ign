@@ -8,4 +8,3 @@ export const servers = {
 } as const;
 
 export type ServerName = keyof typeof servers;
-export const serverNames = Object.keys(servers) as [ServerName, ...ServerName[]];
