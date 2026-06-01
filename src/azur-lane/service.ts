@@ -1,7 +1,7 @@
 import { UnwrapSchema } from "elysia";
 
 import { Model } from "./model.js";
-import { servers, ServerName } from "./servers.js";
+import { servers, type ServerName } from "./servers.js";
 
 import { Fetcher } from "../utils/fetcher.js";
 import { AccountNotFoundError } from "../utils/errors.js";
