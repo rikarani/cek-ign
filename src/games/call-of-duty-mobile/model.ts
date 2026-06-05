@@ -1,0 +1,28 @@
+import { t } from "elysia";
+
+import { Model as BaseModel, Error } from "../../utils/model.js";
+
+export const Model = {
+  query: BaseModel.query({
+    id: t.String({ pattern: "^[0-9]+$", description: "ID akun Call of Duty Mobile", example: "10808316016143544796" }),
+  }),
+  success: BaseModel.success(
+    {
+      id: t.String({ description: "ID akun" }),
+    },
+    {
+      game: "Call of Duty Mobile",
+      account: {
+        id: "10808316016143544796",
+        ign: "tanoniha",
+      },
+    },
+  ),
+  badRequest: Error.badRequest([
+    {
+      path: "/id",
+      message: "Expected string",
+      summary: "Expected property 'id' to be string but found: undefined",
+    },
+  ]),
+};
