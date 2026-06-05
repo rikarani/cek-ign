@@ -8,7 +8,7 @@ import eightBallPool from "./games/8-ball-pool/index.js";
 import aov from "./games/arena-of-valor/index.js";
 import au2 from "./games/au2/index.js";
 import autoChess from "./games/auto-chess/index.js";
-import azurLane from "./azur-lane/index.js";
+import azurLane from "./games/azur-lane/index.js";
 
 const app = new Elysia()
   .use(cors(config.cors))
