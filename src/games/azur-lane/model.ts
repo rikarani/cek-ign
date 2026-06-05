@@ -5,9 +5,9 @@ import { servers, type ServerName } from "./servers.js";
 
 export const Model = {
   query: BaseModel.query({
-    id: t.String({ pattern: "^[0-9]+$", description: "ID akun", example: "271394707" }),
+    id: t.String({ pattern: "^[0-9]+$", description: "ID akun yang mau dicek", example: "271394707" }),
     server: t.UnionEnum(Object.keys(servers) as [ServerName, ...ServerName[]], {
-      description: "Server akun",
+      description: "Server akun yang mau dicek",
       default: "Washington",
     }),
   }),
