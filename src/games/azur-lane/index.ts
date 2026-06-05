@@ -3,7 +3,7 @@ import { Elysia } from "elysia";
 import { Model } from "./model.js";
 import { AzurLane } from "./service.js";
 
-import { Error } from "../utils/model.js";
+import { Error } from "../../utils/model.js";
 
 export default new Elysia().get("/azur-lane", ({ query: { id, server } }) => AzurLane.check({ id, server }), {
   query: Model.query,

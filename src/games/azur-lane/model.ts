@@ -1,6 +1,6 @@
 import { t } from "elysia";
 
-import { Model as BaseModel, Error } from "../utils/model.js";
+import { Model as BaseModel, Error } from "../../utils/model.js";
 import { servers, type ServerName } from "./servers.js";
 
 export const Model = {

@@ -3,11 +3,11 @@ import { UnwrapSchema } from "elysia";
 import { Model } from "./model.js";
 import { servers, type ServerName } from "./servers.js";
 
-import { keys } from "../utils/helper.js";
-import { Fetcher } from "../utils/fetcher.js";
-import { AccountNotFoundError } from "../utils/errors.js";
+import { keys } from "../../utils/helper.js";
+import { Fetcher } from "../../utils/fetcher.js";
+import { AccountNotFoundError } from "../../utils/errors.js";
 
-import { Response } from "../types/helper.js";
+import { Response } from "../../types/helper.js";
 
 export const AzurLane = {
   async check({ id, server }: UnwrapSchema<typeof Model.query>): Promise<Response<UnwrapSchema<typeof Model.success>>> {
