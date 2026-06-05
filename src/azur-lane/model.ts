@@ -1,9 +1,7 @@
 import { t } from "elysia";
 
 import { Model as BaseModel, Error } from "../utils/model.js";
-import { servers } from "./servers.js";
-
-type ServerName = keyof typeof servers;
+import { servers, type ServerName } from "./servers.js";
 
 export const Model = {
   query: BaseModel.query({
