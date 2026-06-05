@@ -3,7 +3,7 @@ import { Elysia } from "elysia";
 import { Model } from "./model.js";
 import { AutoChess } from "./service.js";
 
-import { Error } from "../utils/model.js";
+import { Error } from "../../utils/model.js";
 
 export default new Elysia().get("/auto-chess", ({ query: { id } }) => AutoChess.check({ id }), {
   query: Model.query,

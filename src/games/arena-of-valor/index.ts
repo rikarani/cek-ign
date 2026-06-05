@@ -3,7 +3,7 @@ import { Elysia } from "elysia";
 import { Model } from "./model.js";
 import { ArenaOfValor } from "./service.js";
 
-import { Error } from "../utils/model.js";
+import { Error } from "../../utils/model.js";
 
 export default new Elysia().get("/arena-of-valor", ({ query: { id } }) => ArenaOfValor.check({ id }), {
   query: Model.query,
