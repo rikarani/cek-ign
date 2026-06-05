@@ -29,7 +29,5 @@ export default new Elysia().get("/arena-of-valor", ({ query: { id } }) => ArenaO
   },
   detail: {
     summary: "Arena of Valor",
-    description:
-      "game MOBA mobile yang dikembangkan oleh TiMi Studios, di mana pemain bertarung dalam tim 5v5 untuk menghancurkan base lawan dengan strategi, kerja sama, dan pemilihan hero yang tepat",
   },
 });

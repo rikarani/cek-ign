@@ -29,7 +29,5 @@ export default new Elysia().get("/8-ball-pool", ({ query: { id } }) => EightBall
   },
   detail: {
     summary: "8 Ball Pool",
-    description:
-      "game billiard online populer yang dikembangkan oleh Miniclip, di mana pemain bertanding secara real-time menggunakan aturan 8-ball klasik dengan mengandalkan akurasi dan strategi",
   },
 });

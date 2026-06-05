@@ -29,7 +29,5 @@ export default new Elysia().get("/au2", ({ query: { id } }) => AU2.check({ id })
   },
   detail: {
     summary: "AU2",
-    description:
-      "game rhythm mobile yang menawarkan pengalaman menari dan bersosialisasi dengan pemain lain di dunia virtual penuh warna",
   },
 });

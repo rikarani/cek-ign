@@ -29,7 +29,5 @@ export default new Elysia().get("/azur-lane", ({ query: { id, server } }) => Azu
   },
   detail: {
     summary: "Azur Lane",
-    description:
-      "game side-scrolling shoot 'em up yang menggabungkan elemen RPG dan koleksi kapal perang dalam pertempuran melawan musuh",
   },
 });

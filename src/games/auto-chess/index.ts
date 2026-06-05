@@ -29,7 +29,5 @@ export default new Elysia().get("/auto-chess", ({ query: { id } }) => AutoChess.
   },
   detail: {
     summary: "Auto Chess",
-    description:
-      "game strategi berbasis catur di mana pemain bertarung dengan mengatur bidak di papan untuk mengalahkan lawan dalam pertempuran otomatis",
   },
 });
