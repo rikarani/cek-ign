@@ -1,9 +1,9 @@
 import { Elysia } from "elysia";
 
-import { Model } from "./model.js";
-import { AU2 } from "./service.js";
+import { Model } from "./model";
+import { AU2 } from "./service";
 
-import { Error } from "../../utils/model.js";
+import { Error } from "../../utils/model";
 
 export default new Elysia().get("/au2", ({ query: { id } }) => AU2.check({ id }), {
   query: Model.query,

@@ -1,9 +1,9 @@
 import { Elysia } from "elysia";
 
-import { Model } from "./model.js";
-import { ArenaOfValor } from "./service.js";
+import { Model } from "./model";
+import { ArenaOfValor } from "./service";
 
-import { Error } from "../../utils/model.js";
+import { Error } from "../../utils/model";
 
 export default new Elysia().get("/arena-of-valor", ({ query: { id } }) => ArenaOfValor.check({ id }), {
   query: Model.query,

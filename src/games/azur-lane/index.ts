@@ -1,9 +1,9 @@
 import { Elysia } from "elysia";
 
-import { Model } from "./model.js";
-import { AzurLane } from "./service.js";
+import { Model } from "./model";
+import { AzurLane } from "./service";
 
-import { Error } from "../../utils/model.js";
+import { Error } from "../../utils/model";
 
 export default new Elysia().get("/azur-lane", ({ query: { id, server } }) => AzurLane.check({ id, server }), {
   query: Model.query,

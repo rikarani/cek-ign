@@ -1,9 +1,9 @@
 import { Elysia } from "elysia";
 
-import { Model } from "./model.js";
-import { CallOfDutyMobile } from "./service.js";
+import { Model } from "./model";
+import { CallOfDutyMobile } from "./service";
 
-import { Error } from "../../utils/model.js";
+import { Error } from "../../utils/model";
 
 export default new Elysia().get("/call-of-duty-mobile", ({ query: { id } }) => CallOfDutyMobile.check({ id }), {
   query: Model.query,

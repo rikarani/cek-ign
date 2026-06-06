@@ -1,11 +1,11 @@
 import { UnwrapSchema } from "elysia";
 
-import { Model } from "./model.js";
+import { Model } from "./model";
 
-import { Fetcher } from "../../utils/fetcher.js";
-import { AccountNotFoundError } from "../../utils/errors.js";
+import { Fetcher } from "../../utils/fetcher";
+import { AccountNotFoundError } from "../../utils/errors";
 
-import { Response } from "../../types/helper.js";
+import { Response } from "../../types/helper";
 
 export const CaptainTsubasa = {
   async check({ id }: UnwrapSchema<typeof Model.query>): Promise<Response<UnwrapSchema<typeof Model.success>>> {
@@ -25,7 +25,7 @@ export const CaptainTsubasa = {
         game: data.confirmationFields.productName,
         account: {
           id,
-          ign: data.confirmationFields.username,
+          ign: decodeURIComponent(data.confirmationFields.username).replace(/\+/g, " "),
         },
       },
     };

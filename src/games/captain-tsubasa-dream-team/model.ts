@@ -1,6 +1,6 @@
 import { t } from "elysia";
 
-import { Model as BaseModel, Error } from "../../utils/model.js";
+import { Model as BaseModel, Error } from "../../utils/model";
 
 export const Model = {
   query: BaseModel.query({
@@ -8,7 +8,7 @@ export const Model = {
   }),
   success: BaseModel.success(
     {
-      id: t.String({ description: "ID akun" }),
+      id: t.String({ description: "ID akun yang dicari" }),
     },
     {
       game: "Captain Tsubasa: Dream Team",

@@ -1,6 +1,6 @@
 import { t } from "elysia";
 
-import { Model as BaseModel, Error } from "../../utils/model.js";
+import { Model as BaseModel, Error } from "../../utils/model";
 
 export const Model = {
   query: BaseModel.query({

@@ -1,9 +1,9 @@
 import { Elysia } from "elysia";
 
-import { Model } from "./model.js";
-import { CaptainTsubasa } from "./service.js";
+import { Model } from "./model";
+import { CaptainTsubasa } from "./service";
 
-import { Error } from "../../utils/model.js";
+import { Error } from "../../utils/model";
 
 export default new Elysia().get("/captain-tsubasa", ({ query: { id } }) => CaptainTsubasa.check({ id }), {
   query: Model.query,

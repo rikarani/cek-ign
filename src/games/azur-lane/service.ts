@@ -1,13 +1,12 @@
 import { UnwrapSchema } from "elysia";
 
-import { Model } from "./model.js";
-import { servers, type ServerName } from "./servers.js";
+import { Model } from "./model";
+import { servers, type ServerName } from "./server";
 
-import { keys } from "../../utils/helper.js";
-import { Fetcher } from "../../utils/fetcher.js";
-import { AccountNotFoundError } from "../../utils/errors.js";
+import { Fetcher } from "../../utils/fetcher";
+import { AccountNotFoundError } from "../../utils/errors";
 
-import { Response } from "../../types/helper.js";
+import { Response } from "../../types/helper";
 
 export const AzurLane = {
   async check({ id, server }: UnwrapSchema<typeof Model.query>): Promise<Response<UnwrapSchema<typeof Model.success>>> {
@@ -27,7 +26,7 @@ export const AzurLane = {
         game: data.confirmationFields.productName,
         account: {
           id,
-          server: keys(servers).find((s) => servers[s] === data.user.zoneId) as ServerName,
+          server,
           ign: decodeURIComponent(data.confirmationFields.username).replace(/\+/g, " "),
         },
       },
