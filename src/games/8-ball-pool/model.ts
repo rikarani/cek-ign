@@ -1,27 +1,31 @@
-import { t } from "elysia";
+import { t } from 'elysia';
 
-import { Error, Model as BaseModel } from "../../utils/model";
+import { Model as BaseModel, ResponseError } from '../../utils/model';
 
 export const Model = {
   query: BaseModel.query({
-    id: t.String({ pattern: "^[0-9]+$", description: "ID akun yang mau dicek", example: "2180533717" }),
+    id: t.String({
+      pattern: '^[0-9]+$',
+      description: 'ID akun yang mau dicek',
+      example: '2180533717',
+    }),
   }),
   success: BaseModel.success(
     {
-      id: t.String({ description: "ID akun yang dicari" }),
+      id: t.String({ description: 'ID akun yang dicari' }),
     },
     {
-      game: "8 Ball Pool",
+      game: '8 Ball Pool',
       account: {
-        id: "2180533717",
-        ign: "J**n S***c",
+        id: '2180533717',
+        ign: 'J**n S***c',
       },
     },
   ),
-  badRequest: Error.badRequest([
+  badRequest: ResponseError.badRequest([
     {
-      path: "/id",
-      message: "Expected string",
+      path: '/id',
+      message: 'Expected string',
       summary: "Expected property 'id' to be string but found: undefined",
     },
   ]),
