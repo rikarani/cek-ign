@@ -1,21 +1,21 @@
-import { Elysia } from "elysia";
+import { Elysia } from 'elysia';
 
-import { Model } from "./model";
-import { CaptainTsubasa } from "./service";
+import { Model } from './model';
+import { CaptainTsubasa } from './service';
 
-import { Error } from "../../utils/model";
+import { ResponseError } from '../../utils/model';
 
-export default new Elysia().get("/captain-tsubasa", ({ query: { id } }) => CaptainTsubasa.check({ id }), {
+export default new Elysia().get('/captain-tsubasa', ({ query: { id } }) => CaptainTsubasa.check({ id }), {
   query: Model.query,
   response: {
     200: Model.success,
     400: Model.badRequest,
-    404: Error.notFound,
-    503: Error.serverError,
+    404: ResponseError.notFound,
+    503: ResponseError.serverError,
   },
   error({ error, code, set }) {
-    if (code === "VALIDATION") {
-      set.status = "Bad Request";
+    if (code === 'VALIDATION') {
+      set.status = 'Bad Request';
 
       return {
         success: false,
@@ -28,6 +28,6 @@ export default new Elysia().get("/captain-tsubasa", ({ query: { id } }) => Capta
     }
   },
   detail: {
-    summary: "Captain Tsubasa: Dream Team",
+    summary: 'Captain Tsubasa: Dream Team',
   },
 });
