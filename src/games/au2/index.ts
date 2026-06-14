@@ -1,21 +1,21 @@
-import { Elysia } from "elysia";
+import { Elysia } from 'elysia';
 
-import { Model } from "./model";
-import { AU2 } from "./service";
+import { Model } from './model';
+import { AU2 } from './service';
 
-import { Error } from "../../utils/model";
+import { ResponseError } from '../../utils/model';
 
-export default new Elysia().get("/au2", ({ query: { id } }) => AU2.check({ id }), {
+export default new Elysia().get('/au2', ({ query: { id } }) => AU2.check({ id }), {
   query: Model.query,
   response: {
     200: Model.success,
     400: Model.badRequest,
-    404: Error.notFound,
-    503: Error.serverError,
+    404: ResponseError.notFound,
+    503: ResponseError.serverError,
   },
   error({ error, code, set }) {
-    if (code === "VALIDATION") {
-      set.status = "Bad Request";
+    if (code === 'VALIDATION') {
+      set.status = 'Bad Request';
 
       return {
         success: false,
@@ -28,6 +28,6 @@ export default new Elysia().get("/au2", ({ query: { id } }) => AU2.check({ id })
     }
   },
   detail: {
-    summary: "AU2",
+    summary: 'AU2',
   },
 });

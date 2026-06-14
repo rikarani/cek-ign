@@ -1,11 +1,11 @@
-import { UnwrapSchema } from "elysia";
+import type { UnwrapSchema } from 'elysia';
 
-import { Model } from "./model";
+import type { Model } from './model';
 
-import { Fetcher } from "../../utils/fetcher";
-import { AccountNotFoundError } from "../../utils/errors";
+import type { Response } from '../../types/helper';
 
-import { Response } from "../../types/helper";
+import { Fetcher } from '../../utils/fetcher';
+import { AccountNotFoundError } from '../../utils/errors';
 
 export const AU2 = {
   async check({ id }: UnwrapSchema<typeof Model.query>): Promise<Response<UnwrapSchema<typeof Model.success>>> {
@@ -18,10 +18,10 @@ export const AU2 = {
     return {
       success: true,
       data: {
-        game: "AU2",
+        game: 'AU2',
         account: {
           id,
-          ign: decodeURIComponent(data.data.rolename).replace(/\+/g, " "),
+          ign: decodeURIComponent(data.data.rolename).replace(/\+/g, ' '),
         },
       },
     };
