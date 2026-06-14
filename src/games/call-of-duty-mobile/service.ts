@@ -1,18 +1,18 @@
-import { UnwrapSchema } from "elysia";
+import type { UnwrapSchema } from 'elysia';
 
-import { Model } from "./model";
+import type { Model } from './model';
 
-import { Fetcher } from "../../utils/fetcher";
-import { AccountNotFoundError } from "../../utils/errors";
+import type { Response } from '../../types/helper';
 
-import { Response } from "../../types/helper";
+import { Fetcher } from '../../utils/fetcher';
+import { AccountNotFoundError } from '../../utils/errors';
 
 export const CallOfDutyMobile = {
   async check({ id }: UnwrapSchema<typeof Model.query>): Promise<Response<UnwrapSchema<typeof Model.success>>> {
     const data = await Fetcher.codashop({
-      vpp: { id: "46251", price: "2000000", vp: "0" },
-      user: { userId: id, zoneId: "" },
-      voucherTypeName: "CALL_OF_DUTY",
+      vpp: { id: '46251', price: '2000000', vp: '0' },
+      user: { userId: id, zoneId: '' },
+      voucherTypeName: 'CALL_OF_DUTY',
     });
 
     if (data.errorCode === 12) {
@@ -25,7 +25,7 @@ export const CallOfDutyMobile = {
         game: data.confirmationFields.productName,
         account: {
           id,
-          ign: decodeURIComponent(data.confirmationFields.roles[0].role).replace(/\+/g, " "),
+          ign: decodeURIComponent(data.confirmationFields.roles[0].role).replace(/\+/g, ' '),
         },
       },
     };
