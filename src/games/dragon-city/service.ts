@@ -1,21 +1,20 @@
-import { UnwrapSchema } from "elysia";
+import type { Model } from './model';
 
-import { Model } from "./model";
+import type { Query, Success } from '../../types/helper';
 
-import { Fetcher } from "../../utils/fetcher";
-import { AccountNotFoundError } from "../../utils/errors";
-
-import { Response } from "../../types/helper";
+import { Fetcher } from '../../utils/fetcher';
+import { decodeIgn } from '../../utils/helper';
+import { AccountNotFoundError } from '../../utils/errors';
 
 export const DragonCity = {
-  async check({ id }: UnwrapSchema<typeof Model.query>): Promise<Response<UnwrapSchema<typeof Model.success>>> {
+  async check({ id }: Query<typeof Model.query>): Promise<Success<typeof Model.success>> {
     const data = await Fetcher.codashop({
-      vpp: { id: "254278", price: "479000", vp: "0" },
-      user: { userId: id, zoneId: "" },
-      voucherTypeName: "DRAGON_CITY",
+      vpp: { id: '254278', price: '479000', vp: '0' },
+      user: { userId: id, zoneId: '' },
+      voucherTypeName: 'DRAGON_CITY',
     });
 
-    if (data.errorCode === "-100") {
+    if (data.errorCode === '-100') {
       throw new AccountNotFoundError();
     }
 
@@ -25,7 +24,7 @@ export const DragonCity = {
         game: data.confirmationFields.productName,
         account: {
           id,
-          ign: decodeURIComponent(data.confirmationFields.username).replace(/\+/g, " "),
+          ign: decodeIgn(data.confirmationFields.username),
         },
       },
     };
