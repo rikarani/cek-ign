@@ -1,16 +1,15 @@
-import type { UnwrapSchema } from 'elysia';
-
 import type { Model } from './model';
 
-import type { Response } from '../../types/helper';
+import type { Query, Success } from '../../types/helper';
 
 import { servers } from './server';
 
 import { Fetcher } from '../../utils/fetcher';
+import { decodeIgn } from '../../utils/helper';
 import { AccountNotFoundError } from '../../utils/errors';
 
 export const CrisisAction = {
-  async check({ id, server }: UnwrapSchema<typeof Model.query>): Promise<Response<UnwrapSchema<typeof Model.success>>> {
+  async check({ id, server }: Query<typeof Model.query>): Promise<Success<typeof Model.success>> {
     const data = await Fetcher.codashop({
       vpp: { id: '3745', price: '300000', vp: '0' },
       user: { userId: id, zoneId: servers[server] },
@@ -28,7 +27,7 @@ export const CrisisAction = {
         account: {
           id,
           server,
-          ign: decodeURIComponent(data.confirmationFields.username).replace(/\+/g, ' '),
+          ign: decodeIgn(data.confirmationFields.username),
         },
       },
     };

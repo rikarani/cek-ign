@@ -1,14 +1,13 @@
-import type { UnwrapSchema } from 'elysia';
-
 import type { Model } from './model';
 
-import type { Response } from '../../types/helper';
+import type { Query, Success } from '../../types/helper';
 
 import { Fetcher } from '../../utils/fetcher';
+import { decodeIgn } from '../../utils/helper';
 import { AccountNotFoundError } from '../../utils/errors';
 
 export const ArenaOfValor = {
-  async check({ id }: UnwrapSchema<typeof Model.query>): Promise<Response<UnwrapSchema<typeof Model.success>>> {
+  async check({ id }: Query<typeof Model.query>): Promise<Success<typeof Model.success>> {
     const data = await Fetcher.codashop({
       vpp: { id: '8003', price: '300000', vp: '0' },
       user: { userId: id, zoneId: '' },
@@ -25,7 +24,7 @@ export const ArenaOfValor = {
         game: data.confirmationFields.productName,
         account: {
           id,
-          ign: decodeURIComponent(data.confirmationFields.roles[0].role).replace(/\+/g, ' '),
+          ign: decodeIgn(data.confirmationFields.roles[0].role),
         },
       },
     };

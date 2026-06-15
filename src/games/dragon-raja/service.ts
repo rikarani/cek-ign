@@ -1,10 +1,10 @@
-import type { Model } from './model.js';
+import type { Model } from './model';
 
-import type { Query, Success } from '../../types/helper.js';
+import type { Query, Success } from '../../types/helper';
 
-import { Fetcher } from '../../utils/fetcher.js';
-import { decodeIgn } from '../../utils/helper.js';
-import { AccountNotFoundError } from '../../utils/errors.js';
+import { Fetcher } from '../../utils/fetcher';
+import { decodeIgn } from '../../utils/helper';
+import { AccountNotFoundError } from '../../utils/errors';
 
 export const DragonRaja = {
   async check({ id }: Query<typeof Model.query>): Promise<Success<typeof Model.success>> {
