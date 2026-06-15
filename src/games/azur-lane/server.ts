@@ -7,4 +7,4 @@ export const servers = {
   'Little Enterprise': '6',
 } as const;
 
-export type ServerName = keyof typeof servers;
+export type Server = keyof typeof servers;
