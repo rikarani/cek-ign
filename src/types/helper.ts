@@ -1,3 +1,5 @@
+import type { TSchema, UnwrapSchema } from 'elysia';
+
 type Expand<T> = T extends object ? { [K in keyof T]: Expand<T[K]> } : T;
 
 type DeepRequired<T> = {
@@ -5,3 +7,6 @@ type DeepRequired<T> = {
 };
 
 export type Response<T> = Expand<DeepRequired<T>>;
+
+export type Query<T extends TSchema> = UnwrapSchema<T>;
+export type Success<T extends TSchema> = Expand<DeepRequired<UnwrapSchema<T>>>;

@@ -1,3 +1,17 @@
+export type CodashopParams = {
+  vpp: {
+    id: string;
+    price: string;
+    vp: string;
+  };
+  user: {
+    userId: string;
+    zoneId: string;
+  };
+  voucherTypeName: string;
+  shopLang?: string;
+};
+
 export type CodashopResponse = {
   initCallBackendAPI: boolean;
   orderId: string;
