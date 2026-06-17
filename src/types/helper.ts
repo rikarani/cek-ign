@@ -6,7 +6,5 @@ type DeepRequired<T> = {
   [K in keyof T]-?: Exclude<T[K], undefined> extends infer D ? (D extends object ? DeepRequired<D> : D) : never;
 };
 
-export type Response<T> = Expand<DeepRequired<T>>;
-
 export type Query<T extends TSchema> = UnwrapSchema<T>;
 export type Success<T extends TSchema> = Expand<DeepRequired<UnwrapSchema<T>>>;
