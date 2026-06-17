@@ -2,9 +2,16 @@ import { ExternalServerError } from './errors.js';
 
 import type { CodashopParams, CodashopResponse, DancingIdolResponse } from '../types/shared.js';
 
+type Region = 'id_ID' | 'en_US';
+
 export const Fetcher = {
-  async codashop({ vpp, user, voucherTypeName, shopLang = 'id_ID' }: CodashopParams): Promise<CodashopResponse> {
-    const hit = await fetch('https://order-sg.codashop.com/initPayment.action', {
+  async codashop(region: Region, { vpp, user, voucherTypeName, ...rest }: CodashopParams): Promise<CodashopResponse> {
+    const urlByRegion: Record<Region, string> = {
+      id_ID: 'https://order-sg.codashop.com/initPayment.action',
+      en_US: 'https://order-us.codashop.com/initPayment.action',
+    };
+
+    const hit = await fetch(urlByRegion[region], {
       method: 'POST',
       headers: {
         Origin: 'https://www.codashop.com',
@@ -20,7 +27,8 @@ export const Fetcher = {
         'user.userId': user.userId,
         'user.zoneId': user.zoneId,
         voucherTypeName,
-        shopLang,
+        shopLang: region,
+        ...rest,
       }),
     });
 
