@@ -8,7 +8,7 @@ import { AccountNotFoundError } from '../../utils/errors';
 
 export const AutoChess = {
   async check({ id }: Query<typeof Model.query>): Promise<Success<typeof Model.success>> {
-    const data = await Fetcher.codashop({
+    const data = await Fetcher.codashop('id_ID', {
       vpp: { id: '203896', price: '250000', vp: '0' },
       user: { userId: id, zoneId: '' },
       voucherTypeName: 'AUTO_CHESS',

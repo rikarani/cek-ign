@@ -14,6 +14,9 @@ import eightBallPool from './games/8-ball-pool';
 import crisisAction from './games/crisis-action';
 import callOfDutyMobile from './games/call-of-duty-mobile';
 import captainTsubasa from './games/captain-tsubasa-dream-team';
+import footballMaster2 from './games/football-master-2';
+import freeFire from './games/free-fire';
+import genshinImpact from './games/genshin-impact';
 
 const app = new Elysia()
   .use(cors(config.cors))
@@ -29,7 +32,10 @@ const app = new Elysia()
       .use(captainTsubasa)
       .use(crisisAction)
       .use(dragonCity)
-      .use(dragonRaja),
+      .use(dragonRaja)
+      .use(footballMaster2)
+      .use(freeFire)
+      .use(genshinImpact),
   )
   .get('/', ({ redirect }) => redirect('/openapi'));
 

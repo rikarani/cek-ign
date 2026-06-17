@@ -8,7 +8,7 @@ import { AccountNotFoundError } from '../../utils/errors';
 
 export const EightBallPool = {
   async check({ id }: Query<typeof Model.query>): Promise<Success<typeof Model.success>> {
-    const data = await Fetcher.codashop({
+    const data = await Fetcher.codashop('id_ID', {
       vpp: { id: '205678', price: '140000', vp: '0' },
       user: { userId: id, zoneId: '' },
       voucherTypeName: 'EIGHT_BALL_POOL',
