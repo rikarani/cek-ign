@@ -1,5 +1,5 @@
-import type { CORSConfig } from "@elysiajs/cors";
-import type { ElysiaOpenAPIConfig } from "@elysiajs/openapi";
+import type { CORSConfig } from '@elysiajs/cors';
+import type { ElysiaOpenAPIConfig } from '@elysiajs/openapi';
 
 type Config = {
   port: number | string;
@@ -10,32 +10,32 @@ type Config = {
 export const config = {
   port: process.env.PORT || 6969,
   cors: {
-    origin: "*",
-    methods: ["GET"],
+    origin: '*',
+    methods: ['GET'],
     credentials: false,
   },
   openapi: {
     enabled: true,
     scalar: {
-      theme: "deepSpace",
-      customCss: "",
+      theme: 'deepSpace',
+      customCss: '',
       hideModels: true,
-      operationTitleSource: "summary",
-      orderSchemaPropertiesBy: "preserve",
+      operationTitleSource: 'summary',
+      orderSchemaPropertiesBy: 'preserve',
       defaultHttpClient: {
-        targetKey: "js",
-        clientKey: "fetch",
+        targetKey: 'js',
+        clientKey: 'fetch',
       },
     },
     documentation: {
       info: {
-        version: "0.6.0",
-        title: "Dokumentasi API - Cek IGN",
-        description: "ini cuma wrapper buat API Codashop",
+        version: '0.6.0',
+        title: 'Dokumentasi API - Cek IGN',
+        description: 'ini cuma wrapper buat API Codashop',
       },
     },
     exclude: {
-      paths: ["/"],
+      paths: ['/'],
     },
   },
 } satisfies Config;

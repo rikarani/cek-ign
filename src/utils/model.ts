@@ -1,4 +1,6 @@
-import { t, TSchema, UnwrapSchema } from "elysia";
+import type { TSchema, UnwrapSchema } from 'elysia';
+
+import { t } from 'elysia';
 
 type BadRequestExample = {
   path: string;
@@ -19,18 +21,18 @@ export const Model = {
     return t.Partial(
       t.Object(
         {
-          success: t.Literal(true, { description: "status" }),
+          success: t.Literal(true, { description: 'status' }),
           data: t.Partial(
             t.Object({
-              game: t.String({ description: "game yang di-request" }),
+              game: t.String({ description: 'game yang di-request' }),
               account: t.Partial(
-                t.Object({ ...schema, ign: t.String({ description: "in-game name" }) }, { description: "detail akun" }),
+                t.Object({ ...schema, ign: t.String({ description: 'in-game name' }) }, { description: 'detail akun' }),
               ),
             }),
           ),
         },
         {
-          description: "akun yang dicari ketemu",
+          description: 'akun yang dicari ketemu',
           example: {
             success: true,
             data: example,
@@ -41,29 +43,29 @@ export const Model = {
   },
 };
 
-export const Error = {
+export const ResponseError = {
   badRequest: (example: BadRequestExample[]) => {
     return t.Partial(
       t.Object(
         {
-          success: t.Literal(false, { description: "status" }),
+          success: t.Literal(false, { description: 'status' }),
           errors: t.Array(
             t.Partial(
               t.Object(
                 {
-                  path: t.String({ description: "tempat salahnye" }),
-                  message: t.String({ description: "pesan error singkat" }),
-                  summary: t.String({ description: "pesan error panjang lebar" }),
+                  path: t.String({ description: 'tempat salahnye' }),
+                  message: t.String({ description: 'pesan error singkat' }),
+                  summary: t.String({ description: 'pesan error panjang lebar' }),
                 },
                 {
-                  description: "detail error",
+                  description: 'detail error',
                 },
               ),
             ),
           ),
         },
         {
-          description: "salah format request",
+          description: 'salah format request',
           example: {
             success: false,
             errors: example,
@@ -75,24 +77,24 @@ export const Error = {
   notFound: t.Partial(
     t.Object(
       {
-        success: t.Literal(false, { description: "status" }),
+        success: t.Literal(false, { description: 'status' }),
         error: t.Partial(
           t.Object(
             {
-              code: t.String({ description: "kode error" }),
-              message: t.String({ description: "pesan error" }),
+              code: t.String({ description: 'kode error' }),
+              message: t.String({ description: 'pesan error' }),
             },
-            { description: "detail error" },
+            { description: 'detail error' },
           ),
         ),
       },
       {
-        description: "akun yang dicari gak ketemu",
+        description: 'akun yang dicari gak ketemu',
         example: {
           success: false,
           error: {
-            code: "ACCOUNT_NOT_FOUND",
-            message: "Akun Tidak Ditemukan",
+            code: 'ACCOUNT_NOT_FOUND',
+            message: 'Akun Tidak Ditemukan',
           },
         },
       },
@@ -101,24 +103,24 @@ export const Error = {
   invalidUid: t.Partial(
     t.Object(
       {
-        success: t.Literal(false, { description: "status" }),
+        success: t.Literal(false, { description: 'status' }),
         error: t.Partial(
           t.Object(
             {
-              code: t.String({ description: "kode error" }),
-              message: t.String({ description: "pesan error" }),
+              code: t.String({ description: 'kode error' }),
+              message: t.String({ description: 'pesan error' }),
             },
-            { description: "detail error" },
+            { description: 'detail error' },
           ),
         ),
       },
       {
-        description: "format ID / UID tidak valid",
+        description: 'format ID / UID tidak valid',
         example: {
           success: false,
           error: {
-            code: "INVALID_UID",
-            message: "masukkan UID yang benar",
+            code: 'INVALID_UID',
+            message: 'masukkan UID yang benar',
           },
         },
       },
@@ -127,24 +129,24 @@ export const Error = {
   serverError: t.Partial(
     t.Object(
       {
-        success: t.Literal(false, { description: "status" }),
+        success: t.Literal(false, { description: 'status' }),
         error: t.Partial(
           t.Object(
             {
-              code: t.String({ description: "kode error" }),
-              message: t.String({ description: "pesan error" }),
+              code: t.String({ description: 'kode error' }),
+              message: t.String({ description: 'pesan error' }),
             },
-            { description: "detail error" },
+            { description: 'detail error' },
           ),
         ),
       },
       {
-        description: "ada error di server",
+        description: 'ada error di server',
         example: {
           success: false,
           error: {
-            code: "EXTERNAL_SERVER_ERROR",
-            message: "Kesalahan saat melakukan request ke API eksternal",
+            code: 'EXTERNAL_SERVER_ERROR',
+            message: 'Kesalahan saat melakukan request ke API eksternal',
           },
         },
       },
