@@ -10,7 +10,6 @@ export type CodashopParams = {
   };
   voucherTypeName: string;
   lvtId?: string;
-  shopLang?: string;
   dynamicSkuToken?: string;
   pricePointDynamicSkuToken?: string;
 };
