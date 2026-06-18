@@ -1,6 +1,7 @@
 import { t } from 'elysia';
 
 import { type Server, servers } from './server';
+
 import { Model as BaseModel, ResponseError } from '../../utils/model';
 
 export const Model = {
