@@ -5,7 +5,7 @@ import { HonkaiStarRail } from './service';
 
 import { ResponseError } from '../../utils/model';
 
-export default new Elysia().get('/honkai-star-rail', ({ query: { uid } }) => HonkaiStarRail.check({ uid }), {
+export default new Elysia().get('/hsr', ({ query: { uid } }) => HonkaiStarRail.check({ uid }), {
   query: Model.query,
   response: {
     200: Model.success,
@@ -28,6 +28,6 @@ export default new Elysia().get('/honkai-star-rail', ({ query: { uid } }) => Hon
     }
   },
   detail: {
-    summary: 'Honkai Star Rail',
+    summary: 'Honkai: Star Rail',
   },
 });

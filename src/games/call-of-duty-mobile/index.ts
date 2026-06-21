@@ -5,7 +5,7 @@ import { CallOfDutyMobile } from './service';
 
 import { ResponseError } from '../../utils/model';
 
-export default new Elysia().get('/call-of-duty-mobile', ({ query: { id } }) => CallOfDutyMobile.check({ id }), {
+export default new Elysia().get('/codm', ({ query: { id } }) => CallOfDutyMobile.check({ id }), {
   query: Model.query,
   response: {
     200: Model.success,

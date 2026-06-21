@@ -5,7 +5,7 @@ import { ArenaOfValor } from './service';
 
 import { ResponseError } from '../../utils/model';
 
-export default new Elysia().get('/arena-of-valor', ({ query: { id } }) => ArenaOfValor.check({ id }), {
+export default new Elysia().get('/aov', ({ query: { id } }) => ArenaOfValor.check({ id }), {
   query: Model.query,
   response: {
     200: Model.success,

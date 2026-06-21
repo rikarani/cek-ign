@@ -5,7 +5,7 @@ import { HonkaiImpact3 } from './service';
 
 import { ResponseError } from '../../utils/model';
 
-export default new Elysia().get('/honkai-impact-3', ({ query: { uid } }) => HonkaiImpact3.check({ uid }), {
+export default new Elysia().get('/hi3', ({ query: { uid } }) => HonkaiImpact3.check({ uid }), {
   query: Model.query,
   response: {
     200: Model.success,
