@@ -1,4 +1,5 @@
 import { Elysia } from 'elysia';
+
 import { cors } from '@elysiajs/cors';
 import { openapi } from '@elysiajs/openapi';
 
@@ -21,22 +22,19 @@ import zenlessZoneZero from './games/zenless-zone-zero';
 const app = new Elysia()
   .use(cors(config.cors))
   .use(openapi(config.openapi))
-  .group('/api', (app) =>
-    app
-      .use(aov)
-      .use(azurLane)
-      .use(callOfDutyMobile)
-      .use(freeFire)
-      .use(genshinImpact)
-      .use(honkaiImpact3)
-      .use(honkaiStarRail)
-      .use(loveAndDeepspace)
-      .use(magicChessGoGo)
-      .use(mobileLegends)
-      .use(onmyojiArena)
-      .use(stellaSora)
-      .use(zenlessZoneZero),
-  )
+  .use(aov)
+  .use(azurLane)
+  .use(callOfDutyMobile)
+  .use(freeFire)
+  .use(genshinImpact)
+  .use(honkaiImpact3)
+  .use(honkaiStarRail)
+  .use(loveAndDeepspace)
+  .use(magicChessGoGo)
+  .use(mobileLegends)
+  .use(onmyojiArena)
+  .use(stellaSora)
+  .use(zenlessZoneZero)
   .get('/', ({ redirect }) => redirect('/openapi'));
 
 if (process.env.NODE_ENV !== 'production') {
