@@ -1,6 +1,6 @@
-import { ExternalServerError } from './errors.js';
+import { ExternalServerError } from './errors';
 
-import type { CodashopParams, CodashopResponse, DancingIdolResponse } from '../types/shared.js';
+import type { CodashopParams, CodashopResponse } from '../types/shared';
 
 type Region = 'id_ID' | 'en_US';
 
@@ -30,21 +30,6 @@ export const Fetcher = {
         shopLang: region,
         ...rest,
       }),
-    });
-
-    if (!hit.ok) {
-      throw new ExternalServerError();
-    }
-
-    return await hit.json();
-  },
-  async dancingIdol(id: string): Promise<DancingIdolResponse> {
-    const hit = await fetch(`http://dancingidol.uniuhk.com/api/role/info?roleId=${id}`, {
-      method: 'GET',
-      headers: {
-        Host: 'dancingidol.uniuhk.com',
-        Referer: 'http://dancingidol.uniuhk.com/payment',
-      },
     });
 
     if (!hit.ok) {
