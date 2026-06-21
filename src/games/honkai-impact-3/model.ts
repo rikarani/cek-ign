@@ -1,7 +1,5 @@
 import { t } from 'elysia';
 
-import { type Server, servers } from './server';
-
 import { Model as BaseModel, ResponseError } from '../../utils/model';
 
 export const Model = {
@@ -9,20 +7,18 @@ export const Model = {
     uid: t.String({
       pattern: '^[0-9]+$',
       description: 'UID akun yang mau dicek',
-      example: '700001772',
+      example: '20309731',
     }),
   }),
   success: BaseModel.success(
     {
       uid: t.String({ description: 'UID akun yang dicari' }),
-      server: t.UnionEnum(Object.keys(servers) as [Server, ...Server[]], { description: 'Server akun yang dicari' }),
     },
     {
-      game: 'Genshin Impact',
+      game: 'Honkai Impact 3',
       account: {
-        uid: '700001772',
-        server: 'Europe',
-        ign: 'A*******r',
+        uid: '20309731',
+        ign: 'K****i',
       },
     },
   ),

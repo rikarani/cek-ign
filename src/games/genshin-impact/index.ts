@@ -1,7 +1,7 @@
 import { Elysia } from 'elysia';
 
-import { Model } from './model.js';
-import { GenshinImpact } from './service.js';
+import { Model } from './model';
+import { GenshinImpact } from './service';
 
 import { ResponseError } from '../../utils/model';
 

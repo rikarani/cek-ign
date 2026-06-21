@@ -1,13 +1,13 @@
 import { InvalidUidError } from '../../utils/errors';
 
 export const servers = {
-  America: 'os_usa',
-  Asia: 'os_asia',
-  Europe: 'os_euro',
-  'TW, HK, MO': 'os_cht',
+  America: 'prod_official_usa',
+  Asia: 'prod_official_asia',
+  Europe: 'prod_official_eur',
+  'TW, HK, MO': 'prod_official_cht',
 } as const;
 
-export function getServer(uid: string) {
+export function getServer(uid: string): (typeof servers)[keyof typeof servers] {
   if (uid.startsWith('6')) {
     return servers.America;
   }
@@ -16,7 +16,7 @@ export function getServer(uid: string) {
     return servers.Europe;
   }
 
-  if (uid.startsWith('8') || uid.startsWith('18')) {
+  if (uid.startsWith('8')) {
     return servers.Asia;
   }
 

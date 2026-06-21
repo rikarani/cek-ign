@@ -9,7 +9,7 @@ export const Model = {
     uid: t.String({
       pattern: '^[0-9]+$',
       description: 'UID akun yang mau dicek',
-      example: '700001772',
+      example: '1300683650',
     }),
   }),
   success: BaseModel.success(
@@ -18,11 +18,11 @@ export const Model = {
       server: t.UnionEnum(Object.keys(servers) as [Server, ...Server[]], { description: 'Server akun yang dicari' }),
     },
     {
-      game: 'Genshin Impact',
+      game: 'Zenless Zone Zero',
       account: {
-        uid: '700001772',
-        server: 'Europe',
-        ign: 'A*******r',
+        uid: '1300683650',
+        server: 'Asia',
+        ign: 'M*******E',
       },
     },
   ),

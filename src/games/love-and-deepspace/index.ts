@@ -1,11 +1,11 @@
 import { Elysia } from 'elysia';
 
 import { Model } from './model';
-import { ArenaOfValor } from './service';
+import { LoveAndDeepspace } from './service';
 
 import { ResponseError } from '../../utils/model';
 
-export default new Elysia().get('/aov', ({ query: { id } }) => ArenaOfValor.check({ id }), {
+export default new Elysia().get('/lads', ({ query: { id } }) => LoveAndDeepspace.check({ id }), {
   query: Model.query,
   response: {
     200: Model.success,
@@ -28,6 +28,6 @@ export default new Elysia().get('/aov', ({ query: { id } }) => ArenaOfValor.chec
     }
   },
   detail: {
-    summary: 'Arena of Valor',
+    summary: 'Love and Deepspace',
   },
 });

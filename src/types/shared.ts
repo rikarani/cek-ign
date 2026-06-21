@@ -63,16 +63,3 @@ export type CodashopResponse = {
   isThirdPartyMerchant: boolean;
   txnId: string;
 };
-
-export type DancingIdolResponse = {
-  code: number;
-  msgCode: number;
-  data: {
-    account: number;
-    roleId: number;
-    rolename: string;
-    validate: number;
-  };
-  msg: string;
-  timestamp: number;
-};
